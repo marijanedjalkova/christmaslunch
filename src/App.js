@@ -1,13 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Link} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello from V2</h1>
+        <h1>Christmas Lunch!</h1>
+        <h2>Sloans</h2>
+        <h2>December 16</h2>
+        <h2>14.00</h2>
+        <Link to="/Dashboard"> Choose food </Link>
       </header>
     </div>
   );
