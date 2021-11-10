@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import Choose from './components/Choose'
+import Home from './components/Home'
+import Records from './components/Records'
 
 function App() {
   return (
@@ -23,37 +26,6 @@ function App() {
         <Route path="/records" element={<Records />} />
       </Routes>
       </Router>
-    </div>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <header className="App-header">
-        <h1>Christmas Lunch!</h1>
-        <h2>Sloans</h2>
-        <h2>December 16</h2>
-        <h2>14.00</h2>
-      </header>
-    </div>
-  );
-}
-
-function Choose() {
-  return (
-    <div style={{ padding: 20 }}>
-      <h2>Choose</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adip.</p>
-    </div>
-  );
-}
-
-function Records() {
-  return (
-    <div style={{ padding: 20 }}>
-      <h2>What did I choose?</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adip.</p>
     </div>
   );
 }
