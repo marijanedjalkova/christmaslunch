@@ -1,5 +1,7 @@
-const starterChoices = [
-    { name: "Foo", value: "foo" },
-    { name: "Bar", value: "bar" },
-    { name: "Baz", value: "baz" }
+const mainChoices = [
+    { option: "Foo", description: "foo" },
+    { option: "Bar", description: "bar" },
+    { option: "Baz", description: "baz" }
   ];
+
+  export default mainChoices;
