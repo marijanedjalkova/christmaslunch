@@ -11,7 +11,7 @@ function App() {
       <Router>
       <nav style={{ margin: 10 }}>
     <Link to="/" style={{ padding: 5 }}>
-      Home
+      Event Info
     </Link>
     <Link to="/choose" style={{ padding: 5 }}>
       Submit Food Choices
