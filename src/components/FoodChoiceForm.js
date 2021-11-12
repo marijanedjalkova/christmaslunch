@@ -115,7 +115,7 @@ class FoodChoiceForm extends React.Component {
   
     render() {
       return (
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
             <Form.Group as={Row}>
                 <Form.Label column sm={2}>
                 First name: 

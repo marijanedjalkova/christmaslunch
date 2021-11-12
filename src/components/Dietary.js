@@ -5,16 +5,16 @@ import { faLeaf, faSeedling } from '@fortawesome/free-solid-svg-icons'
 
 fontawesome.library.add(faLeaf, faSeedling);
 
-function getGlutenFree(){
-    return <img src="https://cdn-icons-png.flaticon.com/512/100/100277.png" height="18" width="18"/>;
+function getGlutenFree(i){
+    return <img key={i} src="https://cdn-icons-png.flaticon.com/512/100/100277.png" height="18" width="18"/>;
 }
 
-function renderIcon(dietaryOption) {
+function renderIcon(dietaryOption, i) {
     switch(dietaryOption) {
-      case 'vegetarian': return <FontAwesomeIcon icon={faLeaf} />
-      case 'vegan': return <FontAwesomeIcon icon={faSeedling} />;
-      case 'GF': return getGlutenFree();
-      case 'GFavailable': return (<div>{getGlutenFree()}<div>available</div></div>)
+      case 'vegetarian': return <FontAwesomeIcon key={i} icon={faLeaf} />
+      case 'vegan': return <FontAwesomeIcon key={i} icon={faSeedling} />;
+      case 'GF': return getGlutenFree(i);
+      case 'GFavailable': return (<div key={i}>{getGlutenFree()}<div>available</div></div>)
       default:
         return '';
     }
@@ -24,7 +24,7 @@ function Dietary(diet){
     return (
         <div>
         {diet.diet.map((option, i)=>{
-            return renderIcon(option)
+            return renderIcon(option, i)
          })}
          </div>
     )
