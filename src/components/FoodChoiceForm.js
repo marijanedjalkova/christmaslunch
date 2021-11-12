@@ -30,19 +30,16 @@ class FoodChoiceForm extends React.Component {
     handleSubmit(event) {
       event.preventDefault();
       console.log(this.state);
-      var formData = new FormData();
-      formData.append("name", this.state.name);
-      formData.append("starter", this.state.starter);
-      formData.append("starterGF", this.state.starterGF);
-
-      formData.append("main", this.state.main);
-      formData.append("mainGF", this.state.mainGF);
-
-      formData.append("dessert", this.state.dessert);
-      formData.append("dessertGF", this.state.dessertGF);
+      var formData = {"name": this.state.name,
+            "starter": this.state.starter,
+            "starterGF": this.state.starterGF,
+            "main": this.state.main,
+            "mainGF": this.state.mainGF,
+            "dessert": this.state.dessert,
+            "dessertGF": this.state.dessertGF };
       fetch('https://28uc5uo954.execute-api.us-east-2.amazonaws.com/dev/lunchperson', {
         method: 'POST',
-        body: JSON.stringify({formData}),
+        body: JSON.stringify( formData ),
         headers: { 'Content-Type': 'application/json' },
       })
         .then(res => res.json())
