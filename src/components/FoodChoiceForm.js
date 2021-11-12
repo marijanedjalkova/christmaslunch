@@ -3,9 +3,12 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import FormCheck from "react-bootstrap/FormCheck";
+import Feedback from "react-bootstrap/Feedback";
 import { Radio, RadioGroup} from 'react-radio-group'
 import choices  from './consts';
 import Dietary from './Dietary';
+import isGFAvailable from './util';
 
 class FoodChoiceForm extends React.Component {
     constructor(props) {
@@ -16,8 +19,11 @@ class FoodChoiceForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateName = this.updateName.bind(this);
         this.updateStarter = this.updateStarter.bind(this);
+        this.updateStarterGF = this.updateStarterGF.bind(this);
         this.updateMain = this.updateMain.bind(this);
+        this.updateMainGF = this.updateMainGF.bind(this);
         this.updateDessert = this.updateDessert.bind(this);
+        this.updateDessertGF = this.updateDessertGF.bind(this);
 
       }
   
@@ -52,6 +58,36 @@ class FoodChoiceForm extends React.Component {
           starter: event
         }, () => {
             console.log("starter is now " + this.state.starter);
+            console.log(this.state);
+        })
+        
+      }
+      
+      updateStarterGF() {
+        this.setState({
+         starterGF : !this.state.starterGF
+        }, () => {
+            console.log("starter GF is now " + this.state.starterGF);
+            console.log(this.state);
+        })
+        
+      }
+
+      updateMainGF() {
+        this.setState({
+         mainGF : !this.state.mainGF
+        }, () => {
+            console.log("main GF is now " + this.state.mainGF);
+            console.log(this.state);
+        })
+        
+      }
+
+      updateDessertGF() {
+        this.setState({
+         dessertGF : !this.state.dessertGF
+        }, () => {
+            console.log("dessert GF is now " + this.state.dessertGF);
             console.log(this.state);
         })
         
@@ -92,9 +128,7 @@ class FoodChoiceForm extends React.Component {
                 </Col>
             </Form.Group>
             <Form.Group as={Row}>
-                <Form.Label column sm={2}>
-                Select a Starter:
-                </Form.Label>
+                <Form.Label column sm={2}> Select a Starter:</Form.Label>
                 <Col sm={8}>
                 <RadioGroup name="starters" selectedValue={this.state.starter} onChange={this.updateStarter}>
                 {choices.starters.map((option, i)=>{
@@ -102,12 +136,16 @@ class FoodChoiceForm extends React.Component {
                    {option.description}<Dietary diet={option.diet}/></div>
                 })}
                 </RadioGroup>
+                {isGFAvailable(this.state.starter, "starter") && ( 
+                    <FormCheck >
+                        <FormCheck.Label>Do you want selected starter Gluten Free?
+                            <FormCheck.Input type="checkbox" onChange={this.updateStarterGF} checked={this.state.starterGF}/>
+                        </FormCheck.Label>
+                    </FormCheck> )}
                 </Col>
             </Form.Group>
             <Form.Group as={Row}>
-                <Form.Label column sm={2}>
-                Select a Main:
-                </Form.Label>
+                <Form.Label column sm={2}>Select a Main:</Form.Label>
                 <Col sm={8}>
                 <RadioGroup name="mains" selectedValue={this.state.main} onChange={this.updateMain}>
                 {choices.mains.map((option, i)=>{
@@ -115,12 +153,16 @@ class FoodChoiceForm extends React.Component {
                    {option.description}<Dietary diet={option.diet}/></div>
                 })}
                 </RadioGroup>
+                {isGFAvailable(this.state.main, "main") && ( 
+                    <FormCheck >
+                        <FormCheck.Label>Do you want selected main Gluten Free?
+                            <FormCheck.Input type="checkbox" onChange={this.updateMainGF} checked={this.state.mainGF}/>
+                        </FormCheck.Label>
+                    </FormCheck> )}
                 </Col>
             </Form.Group>
             <Form.Group as={Row}>
-                <Form.Label column sm={2}>
-                Select a Dessert:
-                </Form.Label>
+                <Form.Label column sm={2}>Select a Dessert:</Form.Label>
                 <Col sm={8}>
                 <RadioGroup name="desserts" selectedValue={this.state.dessert} onChange={this.updateDessert}>
                 {choices.desserts.map((option, i)=>{
@@ -128,6 +170,12 @@ class FoodChoiceForm extends React.Component {
                    {option.description}<Dietary diet={option.diet}/></div>
                 })}
                 </RadioGroup>
+                {isGFAvailable(this.state.dessert, "dessert") && ( 
+                    <FormCheck >
+                        <FormCheck.Label>Do you want selected dessert Gluten Free?
+                            <FormCheck.Input type="checkbox" onChange={this.updateDessertGF} checked={this.state.dessertGF}/>
+                        </FormCheck.Label>
+                    </FormCheck> )}
                 </Col>
             </Form.Group>
             
