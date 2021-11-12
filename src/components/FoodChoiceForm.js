@@ -28,8 +28,8 @@ class FoodChoiceForm extends React.Component {
       }
   
     handleSubmit(event) {
-      console.log('submitted: ' + this.name.current.value);
       event.preventDefault();
+      console.log('submitted: ' + this.state);
     }
 
     updateName(event) {
@@ -132,7 +132,7 @@ class FoodChoiceForm extends React.Component {
                 <Col sm={8}>
                 <RadioGroup name="starters" selectedValue={this.state.starter} onChange={this.updateStarter}>
                 {choices.starters.map((option, i)=>{
-                   return <div><Radio value={option.option} className="radio-button" />
+                   return <div key={i}><Radio value={option.option} className="radio-button" />
                    {option.description}<Dietary diet={option.diet}/></div>
                 })}
                 </RadioGroup>
@@ -149,7 +149,7 @@ class FoodChoiceForm extends React.Component {
                 <Col sm={8}>
                 <RadioGroup name="mains" selectedValue={this.state.main} onChange={this.updateMain}>
                 {choices.mains.map((option, i)=>{
-                   return <div><Radio value={option.option} className="radio-button" />
+                   return <div key={i}><Radio value={option.option} className="radio-button" />
                    {option.description}<Dietary diet={option.diet}/></div>
                 })}
                 </RadioGroup>
@@ -166,7 +166,7 @@ class FoodChoiceForm extends React.Component {
                 <Col sm={8}>
                 <RadioGroup name="desserts" selectedValue={this.state.dessert} onChange={this.updateDessert}>
                 {choices.desserts.map((option, i)=>{
-                   return <div><Radio value={option.option} className="radio-button" />
+                   return <div key={i}><Radio value={option.option} className="radio-button" />
                    {option.description}<Dietary diet={option.diet}/></div>
                 })}
                 </RadioGroup>
