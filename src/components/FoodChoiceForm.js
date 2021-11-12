@@ -4,7 +4,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { Radio, RadioGroup} from 'react-radio-group'
-import mainChoices from './consts';
+import choices  from './consts';
+import Dietary from './Dietary';
 
 class FoodChoiceForm extends React.Component {
     constructor(props) {
@@ -96,10 +97,10 @@ class FoodChoiceForm extends React.Component {
                 </Form.Label>
                 <Col sm={8}>
                 <RadioGroup name="starters" selectedValue={this.state.starter} onChange={this.updateStarter}>
-                <Radio value="soup" className="radio-button" />Spiced parsnip and apple soup, crusty bread, vegetarian, GF available
-                    <Radio value="tartlet" className="radio-button" />Mushroom and caramelised onion tartlet, blue cheese dressing
-                    <Radio value="salmon" className="radio-button" />Smoked salmon, lemon and dill dressing, potato salad, wholemeal bread
-                    <Radio value="pate" className="radio-button" />Chicken liver pate, plum and raisin chutney, oatcakes, GF available
+                {choices.starters.map((option, i)=>{
+                   return <div><Radio value={option.option} className="radio-button" />
+                   {option.description}<Dietary diet={option.diet}/></div>
+                })}
                 </RadioGroup>
                 </Col>
             </Form.Group>
@@ -109,9 +110,9 @@ class FoodChoiceForm extends React.Component {
                 </Form.Label>
                 <Col sm={8}>
                 <RadioGroup name="mains" selectedValue={this.state.main} onChange={this.updateMain}>
-                {
-                mainChoices.map((mainOption, i)=>{
-                   return <div><Radio value={mainOption.option} className="radio-button" />{mainOption.option}</div>
+                {choices.mains.map((option, i)=>{
+                   return <div><Radio value={option.option} className="radio-button" />
+                   {option.description}<Dietary diet={option.diet}/></div>
                 })}
                 </RadioGroup>
                 </Col>
@@ -122,9 +123,10 @@ class FoodChoiceForm extends React.Component {
                 </Form.Label>
                 <Col sm={8}>
                 <RadioGroup name="desserts" selectedValue={this.state.dessert} onChange={this.updateDessert}>
-                    <Radio value="apple" className="radio-button" />Apple
-                    <Radio value="apple2" className="radio-button" />Orange
-                    <Radio value="apple3" className="radio-button" />Banana
+                {choices.desserts.map((option, i)=>{
+                   return <div><Radio value={option.option} className="radio-button" />
+                   {option.description}<Dietary diet={option.diet}/></div>
+                })}
                 </RadioGroup>
                 </Col>
             </Form.Group>
