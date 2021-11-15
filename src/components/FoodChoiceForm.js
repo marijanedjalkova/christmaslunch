@@ -4,7 +4,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import FormCheck from "react-bootstrap/FormCheck";
-import Feedback from "react-bootstrap/Feedback";
 import { Radio, RadioGroup} from 'react-radio-group'
 import choices  from './consts';
 import Dietary from './Dietary';
