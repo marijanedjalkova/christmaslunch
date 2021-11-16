@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import RecordView from './RecordView'
 
 class Records extends React.Component {
   constructor(props) {
@@ -41,7 +42,17 @@ handleSubmit(event) {
     method: 'GET'
   })
     .then(res => res.json())
-    .then(json => console.log(json))
+    .then(json => {
+      console.log(json);
+      this.setState({starter: json.starter,
+                     starterGF: json.starterGF,
+                     main: json.main,
+                     mainGF: json.mainGF,
+                     dessert: json.dessert,
+                     dessertGF: json.dessertGF}, 
+        () => {console.log(this.state);})
+    }
+    )
 }
 
 
@@ -70,6 +81,7 @@ render() {
                 Submit
             </Button>
         </Form>
+        <RecordView data={this.state}/>
       </div>
     );
   }
