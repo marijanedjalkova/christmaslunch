@@ -7,12 +7,7 @@ import Records from './components/Records'
 
 function App() {
   return (
-    <div className="App" style={{  
-      backgroundImage: "url(" + "https://images.pexels.com/photos/34153/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350" + ")",
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat'
-    }}>
+    <div className="App">
       <Router>
         <nav class="row">
           <Link to="/" class="col-sm-4">Event Info</Link>
