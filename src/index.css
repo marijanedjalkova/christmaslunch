@@ -13,6 +13,15 @@ code {
     monospace;
 }
 
+h1, h2 {
+  background-color: #d78383;
+  border-radius: 2vh;
+  padding: 2vh;
+  padding-left: 5vh;
+  padding-right: 5vh;
+  mix-blend-mode: hard-light;
+}
+
 a {
   color: #d78383;
 }
