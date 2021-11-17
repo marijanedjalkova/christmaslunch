@@ -9,7 +9,7 @@
 @media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */
   .App {
     text-align: center;
-    background-image: url("./images/christmas-background2.jpg");
+    background-image: url("./images/christmas-background-vertical.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
   }
