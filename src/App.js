@@ -7,12 +7,17 @@ import Records from './components/Records'
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{  
+      backgroundImage: "url(" + "https://images.pexels.com/photos/34153/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350" + ")",
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat'
+    }}>
       <Router>
-        <nav style={{ margin: 10 }}>
-          <Link to="/" style={{ padding: 5 }}>Event Info</Link>
-          <Link to="/choose" style={{ padding: 5 }}>Submit Food Choices</Link>
-          <Link to="/records" style={{ padding: 5 }}>What did I choose?</Link>
+        <nav class="row">
+          <Link to="/" class="col-sm-4">Event Info</Link>
+          <Link to="/choose" class="col-sm-4">Submit Food Choices</Link>
+          <Link to="/records" class="col-sm-4">What did I choose?</Link>
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />

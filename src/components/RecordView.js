@@ -37,7 +37,7 @@ class RecordView extends React.Component {
       return (<div>{this.props.data.errorMessage}</div>)
     }
     return (
-      <div>
+      <div class="container">
         <div>
           <div>Starter:</div>
           <div>{printStarter(this.props.data.starter)}</div>
