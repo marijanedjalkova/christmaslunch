@@ -9,7 +9,8 @@ class Records extends React.Component {
   constructor(props) {
     super(props);
     this.state = { name: "", starter: "", starterGF: false, main: "", mainGF: false, 
-    dessert: "", dessertGF: false, isMartin: false };
+    dessert: "", dessertGF: false, isMartin: false,
+    resultReceived: false };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateName = this.updateName.bind(this);
   }
@@ -41,7 +42,9 @@ handleSubmit(event) {
   fetch('https://28uc5uo954.execute-api.us-east-2.amazonaws.com/dev/lunchperson?name=' + this.state.name, {
     method: 'GET'
   })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) { throw res }
+      return res.json()})
     .then(json => {
       console.log(json);
       this.setState({starter: json.starter,
@@ -49,10 +52,24 @@ handleSubmit(event) {
                      main: json.main,
                      mainGF: json.mainGF,
                      dessert: json.dessert,
-                     dessertGF: json.dessertGF}, 
-        () => {console.log(this.state);})
+                     dessertGF: json.dessertGF,
+                     resultReceived: true,
+                     isError: false,
+                     errorMessage : undefined
+                }, 
+        () => {})
     }
     )
+    .catch((err) => {
+      console.log(err); 
+      err.text().then( errorMessage => {
+        this.setState({
+          isError: true,
+          resultReceived: true,
+          errorMessage : JSON.parse(errorMessage).message})
+      })
+      
+    })
 }
 
 
