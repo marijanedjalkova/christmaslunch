@@ -16,13 +16,3 @@ code {
 a {
   color: #d78383;
 }
-
-@media only screen and (max-width: 320px) {
-  /* Small screen, non-retina */
-  .App {
-    text-align: center;
-    background-image: url("./images/christmas-background2.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
-  }
-}
