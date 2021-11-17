@@ -12,6 +12,7 @@
     background-image: url("./images/christmas-background-vertical.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
+    min-height: 100%
   }
  }
 @media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
