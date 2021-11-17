@@ -9,22 +9,16 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <nav style={{ margin: 10 }}>
-    <Link to="/" style={{ padding: 5 }}>
-      Event Info
-    </Link>
-    <Link to="/choose" style={{ padding: 5 }}>
-      Submit Food Choices
-    </Link>
-    <Link to="/records" style={{ padding: 5 }}>
-      What did I choose?
-    </Link>
-  </nav>
+        <nav style={{ margin: 10 }}>
+          <Link to="/" style={{ padding: 5 }}>Event Info</Link>
+          <Link to="/choose" style={{ padding: 5 }}>Submit Food Choices</Link>
+          <Link to="/records" style={{ padding: 5 }}>What did I choose?</Link>
+        </nav>
         <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/choose" element={<Choose />} />
-        <Route path="/records" element={<Records />} />
-      </Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/choose" element={<Choose />} />
+          <Route path="/records" element={<Records />} />
+        </Routes>
       </Router>
     </div>
   );

@@ -14,7 +14,7 @@ class FoodChoiceForm extends React.Component {
         super(props);
         this.state = { name: "", starter: "", starterGF: false, main: "", mainGF: false, 
         dessert: "", dessertGF: false,
-    isMartin: false };
+    isMartin: false, errors: {} };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateName = this.updateName.bind(this);
         this.updateStarter = this.updateStarter.bind(this);
@@ -25,10 +25,36 @@ class FoodChoiceForm extends React.Component {
         this.updateDessertGF = this.updateDessertGF.bind(this);
 
       }
+
+    handleValidation(){
+        let formIsValid = true;
+        let errors = {};
+        if(!this.state.name){
+            formIsValid = false;
+            errors["name"] = "Cannot be empty";
+        }
+
+        if(typeof this.state.name !== "undefined"){
+        if(!this.state.name.match(/^[a-zA-Z\s]+$/)){
+            formIsValid = false;
+            errors["name"] = "Only letters";
+        }      	
+        }
+    
+        if (this.state.name.toLowerCase().replaceAll(/\s/g,'') === "martin"){
+            formIsValid = false;
+            errors["name"] = "Please add first letter of your surname";
+        }
+        this.setState({errors: errors});
+        return formIsValid;
+    }
   
     handleSubmit(event) {
       event.preventDefault();
       console.log(this.state);
+      if (!this.handleValidation()){
+          return null;
+      }
       var formData = {"name": this.state.name,
             "starter": this.state.starter,
             "starterGF": this.state.starterGF,
@@ -41,8 +67,24 @@ class FoodChoiceForm extends React.Component {
         body: JSON.stringify( formData ),
         headers: { 'Content-Type': 'application/json' },
       })
-        .then(res => res.json())
-        .then(json => console.log(json))
+        .then(res => {
+            if (!res.ok) { throw res }
+            return res.json()})
+        .then(json => {
+            this.setState({
+                submitted: true,
+                isError: false})
+            this.props.onSuccess()
+            console.log(json)})
+        .catch((err) => {
+            console.log(err); 
+            err.text().then( errorMessage => {
+              this.setState({
+                isError: true,
+                errorMessage : JSON.parse(errorMessage).message})
+            })
+            
+          })
     }
 
     updateName(event) {
@@ -138,6 +180,7 @@ class FoodChoiceForm extends React.Component {
                 <Form.Control 
                     type="text" placeholder="Name" 
                     value={this.state.name} onChange={this.updateName}/>
+                    <span className="error">{this.state.errors["name"]}</span>
                 </Col>
             </Form.Group>
             <Form.Group as={Row}>

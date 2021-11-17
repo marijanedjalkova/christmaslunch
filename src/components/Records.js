@@ -58,8 +58,7 @@ handleSubmit(event) {
                      errorMessage : undefined
                 }, 
         () => {})
-    }
-    )
+    })
     .catch((err) => {
       console.log(err); 
       err.text().then( errorMessage => {
