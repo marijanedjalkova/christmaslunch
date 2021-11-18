@@ -1,11 +1,20 @@
 body {
-  height: 100%;
+  height: 100vh;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: white;
+}
+
+html {
+  height: 100vh;
+}
+
+div {
+  color: white;
 }
 
 code {
@@ -13,15 +22,43 @@ code {
     monospace;
 }
 
-h1, h2 {
-  background-color: #d78383;
-  border-radius: 2vh;
-  padding: 2vh;
-  padding-left: 5vh;
-  padding-right: 5vh;
-  mix-blend-mode: hard-light;
-}
-
 a {
   color: #d78383;
+}
+
+h1, h2 {
+  color: white
+}
+
+.nameLabel {
+  color: white;
+  font-size: x-large;
+}
+
+#nameRow {
+  padding: 3vh;
+}
+
+.menu {
+  margin: 3vh;
+  background: radial-gradient(#84563f, #55181c);
+  background-blend-mode: hard-light;
+  opacity:0.8;
+  transition: background-color 1s linear;
+  color: white;
+  width: 80vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.course-name {
+  font-size: larger;
+  text-decoration: underline;
+
+}
+
+.course-value {
+  font-style: italic;
 }

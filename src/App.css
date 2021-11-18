@@ -2,7 +2,9 @@
   text-align: center;
   background-image: url("./images/christmas-background.jpg");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 100vh;
+  background-attachment: fixed;
+  height: 100vh;
 }
 
 
@@ -37,8 +39,6 @@
   }
 }
 
-
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -56,4 +56,13 @@
 
 .App-link {
   color: #d78383;
+}
+
+h1, h2 {
+  background-color: #d78383;
+  border-radius: 2vh;
+  padding: 2vh;
+  padding-left: 5vh;
+  padding-right: 5vh;
+  mix-blend-mode: hard-light;
 }

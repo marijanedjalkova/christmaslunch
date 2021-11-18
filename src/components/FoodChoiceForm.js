@@ -9,6 +9,15 @@ import choices  from './consts';
 import Dietary from './Dietary';
 import isGFAvailable from './util';
 
+const printOption = (option, i) => {
+    console.log("inside method")
+    console.log(option)
+    let result = (<div key={i}><Radio value={option.option} className="radio-button" />
+    {option.description}<Dietary diet={option.diet}/></div>);
+    console.log(result)
+    return result;
+}
+
 class FoodChoiceForm extends React.Component {
     constructor(props) {
         super(props);
@@ -170,27 +179,25 @@ class FoodChoiceForm extends React.Component {
   
     render() {
       return (
-        <Form onSubmit={this.handleSubmit}>
-            <Form.Group as={Row}>
-                <Form.Label column sm={2}>
+        <Form onSubmit={this.handleSubmit} >
+            <Form.Group as={Row} id="nameRow">
+                <Form.Label class="nameLabel col-sm-4">
                 First name: 
                 {this.state.isMartin &&<div>add first letter of your surname, there's two of you</div>}
                 </Form.Label>
-                <Col sm={8}>
+                <Col sm={6}>
                 <Form.Control 
                     type="text" placeholder="Name" 
                     value={this.state.name} onChange={this.updateName}/>
                     <span className="error">{this.state.errors["name"]}</span>
                 </Col>
             </Form.Group>
-            <Form.Group as={Row}>
-                <Form.Label column sm={2}> Select a Starter:</Form.Label>
-                <Col sm={8}>
+            <div class="menu">
+            <Form.Group >
+                <Form.Label class="course-name"> Select a Starter:</Form.Label>
+                <Row>
                 <RadioGroup name="starters" selectedValue={this.state.starter} onChange={this.updateStarter}>
-                {choices.starters.map((option, i)=>{
-                   return <div key={i}><Radio value={option.option} className="radio-button" />
-                   {option.description}<Dietary diet={option.diet}/></div>
-                })}
+                {choices.starters.map((option, i)=>{ return printOption(option, i)})}
                 </RadioGroup>
                 {isGFAvailable(this.state.starter, "starter") && ( 
                     <FormCheck >
@@ -198,16 +205,13 @@ class FoodChoiceForm extends React.Component {
                             <FormCheck.Input type="checkbox" onChange={this.updateStarterGF} checked={this.state.starterGF}/>
                         </FormCheck.Label>
                     </FormCheck> )}
-                </Col>
+                </Row>
             </Form.Group>
-            <Form.Group as={Row}>
-                <Form.Label column sm={2}>Select a Main:</Form.Label>
-                <Col sm={8}>
+            <Form.Group>
+                <Form.Label class="course-name">Select a Main:</Form.Label>
+                <Col>
                 <RadioGroup name="mains" selectedValue={this.state.main} onChange={this.updateMain}>
-                {choices.mains.map((option, i)=>{
-                   return <div key={i}><Radio value={option.option} className="radio-button" />
-                   {option.description}<Dietary diet={option.diet}/></div>
-                })}
+                {choices.mains.map((option, i)=>{return printOption(option, i)})}
                 </RadioGroup>
                 {isGFAvailable(this.state.main, "main") && ( 
                     <FormCheck >
@@ -217,14 +221,11 @@ class FoodChoiceForm extends React.Component {
                     </FormCheck> )}
                 </Col>
             </Form.Group>
-            <Form.Group as={Row}>
-                <Form.Label column sm={2}>Select a Dessert:</Form.Label>
-                <Col sm={8}>
+            <Form.Group>
+                <Form.Label class="course-name">Select a Dessert:</Form.Label>
+                <Col>
                 <RadioGroup name="desserts" selectedValue={this.state.dessert} onChange={this.updateDessert}>
-                {choices.desserts.map((option, i)=>{
-                   return <div key={i}><Radio value={option.option} className="radio-button" />
-                   {option.description}<Dietary diet={option.diet}/></div>
-                })}
+                {choices.desserts.map((option, i)=>{return printOption(option, i)})}
                 </RadioGroup>
                 {isGFAvailable(this.state.dessert, "dessert") && ( 
                     <FormCheck >
@@ -234,7 +235,7 @@ class FoodChoiceForm extends React.Component {
                     </FormCheck> )}
                 </Col>
             </Form.Group>
-            
+            </div>
             <Button
                 column="true"
                 sm={2}

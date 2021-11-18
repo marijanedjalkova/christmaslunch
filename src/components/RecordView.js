@@ -1,5 +1,6 @@
 import React from 'react';
 import choices  from './consts';
+import './RecordView.css';
 
 const printGF = (booleanToPrint) =>{
   if (booleanToPrint == undefined){
@@ -37,21 +38,21 @@ class RecordView extends React.Component {
       return (<div>{this.props.data.errorMessage}</div>)
     }
     return (
-      <div class="container">
-        <div>
-          <div>Starter:</div>
-          <div>{printStarter(this.props.data.starter)}</div>
-          {printGF(this.props.data.starterGF)}
+      <div class="menu">
+        <div class="course">
+          <div class="course-name">Starter:</div>
+          <div class="course-value">{printStarter(this.props.data.starter)}</div>
+          <div class="course-value">{printGF(this.props.data.starterGF)}</div>
         </div>
-        <div>
-          <div>Main:</div>
-          <div>{printMain(this.props.data.main)}</div>
-          {printGF(this.props.data.mainGF)}
+        <div class="course">
+          <div class="course-name">Main:</div>
+          <div class="course-value">{printMain(this.props.data.main)}</div>
+          <div class="course-value">{printGF(this.props.data.mainGF)}</div>
         </div>
-        <div>
-          <div>Dessert:</div>
-          <div>{printDessert(this.props.data.dessert)}</div>
-          {printGF(this.props.data.dessertGF)}
+        <div class="course">
+          <div class="course-name">Dessert:</div>
+          <div class="course-value">{printDessert(this.props.data.dessert)}</div>
+          <div class="course-value">{printGF(this.props.data.dessertGF)}</div>
         </div>
       </div>
     )

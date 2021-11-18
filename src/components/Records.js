@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import RecordView from './RecordView'
+import './Record.css';
 
 class Records extends React.Component {
   constructor(props) {
@@ -77,12 +78,12 @@ render() {
       <div style={{ padding: 20 }}>
         <h2>What did I choose?</h2>
         <Form onSubmit={this.handleSubmit}>
-        <Form.Group as={Row}>
-                <Form.Label column sm={2}>
-                First name: 
+        <Form.Group as={Row} id="nameRow">
+                <Form.Label class="nameLabel col-sm-4" >
+                First name:
                 {this.state.isMartin &&<div>add first letter of your surname, there's two of you</div>}
                 </Form.Label>
-                <Col sm={8}>
+                <Col sm={4}>
                 <Form.Control 
                     type="text" placeholder="Name" 
                     value={this.state.name} onChange={this.updateName}/>
@@ -97,7 +98,7 @@ render() {
                 Submit
             </Button>
         </Form>
-        <RecordView data={this.state}/>
+        <RecordView class="record-view" data={this.state}/>
       </div>
     );
   }
