@@ -6,11 +6,11 @@ import { faLeaf, faSeedling } from '@fortawesome/free-solid-svg-icons'
 fontawesome.library.add(faLeaf, faSeedling);
 
 function getGlutenFree(i){
-    return <img key={i} src="https://cdn-icons-png.flaticon.com/512/100/100277.png" height="18" width="18"/>;
+    return <img key={i} src="https://cdn-icons-png.flaticon.com/512/100/100277.png" height="18" width="18" class="toinvert"/>;
 }
 
 function getGlutenFreeAvailable(i){
-return (<div key={i} class="gfAvailable"><img class="onSameLine" src="https://cdn-icons-png.flaticon.com/512/100/100277.png" height="18" width="18"/><div class="onSameLine">available</div></div>);
+return (<div key={i} class="gfAvailable"><img class="onSameLine" class="toinvert" src="https://cdn-icons-png.flaticon.com/512/100/100277.png" height="18" width="18"/><div class="onSameLine">available</div></div>);
 }
 
 function renderIcon(dietaryOption, i) {

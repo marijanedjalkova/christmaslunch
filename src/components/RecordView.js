@@ -34,6 +34,51 @@ const findDescriptionFromList = (optionName, optionList) => {
 const findWholeItemFromList = (optionName, optionList) => {
   return optionList.find(element => {return element.option === optionName})}
 
+const printWholeStarter = (dish, dishGF) => {
+  var typeOfDish = "Starter";
+  let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
+  if (dish == undefined){
+    return (<div>{noChoiceMessage}</div>);
+  } 
+  return (
+  <div class="course">
+          <div class="course-name">{typeOfDish}:</div>
+          <div class="course-value">{printStarter(dish)}</div>
+          <div class="course-value">{printGF(dishGF, "starters", dish)}</div>
+        </div>
+  )
+}
+
+const printWholeMain = (dish, dishGF) => {
+  var typeOfDish = "Main";
+  let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
+  if (dish == undefined){
+    return (<div>{noChoiceMessage}</div>);
+  } 
+  return (
+  <div class="course">
+          <div class="course-name">{typeOfDish}:</div>
+          <div class="course-value">{printMain(dish)}</div>
+          <div class="course-value">{printGF(dishGF, "mains", dish)}</div>
+        </div>
+  )
+}
+
+const printWholeDessert = (dish, dishGF) => {
+  var typeOfDish = "Dessert";
+  let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
+  if (dish == undefined){
+    return (<div>{noChoiceMessage}</div>);
+  } 
+  return (
+  <div class="course">
+          <div class="course-name">{typeOfDish}:</div>
+          <div class="course-value">{printDessert(dish)}</div>
+          <div class="course-value">{printGF(dishGF, "desserts", dish)}</div>
+        </div>
+  )
+}
+
 class RecordView extends React.Component {
 
   render(){
@@ -45,21 +90,9 @@ class RecordView extends React.Component {
     }
     return (
       <div class="menu">
-        <div class="course">
-          <div class="course-name">Starter:</div>
-          <div class="course-value">{printStarter(this.props.data.starter)}</div>
-          <div class="course-value">{printGF(this.props.data.starterGF, "starters", this.props.data.starter)}</div>
-        </div>
-        <div class="course">
-          <div class="course-name">Main:</div>
-          <div class="course-value">{printMain(this.props.data.main)}</div>
-          <div class="course-value">{printGF(this.props.data.mainGF, "mains", this.props.data.main)}</div>
-        </div>
-        <div class="course">
-          <div class="course-name">Dessert:</div>
-          <div class="course-value">{printDessert(this.props.data.dessert)}</div>
-          <div class="course-value">{printGF(this.props.data.dessertGF, "desserts", this.props.data.dessert)}</div>
-        </div>
+        {printWholeStarter(this.props.data.starter, this.props.data.starterGF)}
+        {printWholeMain(this.props.data.main, this.props.data.mainGF)}
+        {printWholeDessert(this.props.data.dessert, this.props.data.dessertGF)}
       </div>
     )
   }

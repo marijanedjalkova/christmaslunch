@@ -33,6 +33,11 @@ h1, h2 {
 .nameLabel {
   color: white;
   font-size: x-large;
+  background-color: #af453c;
+  border-radius: 2vh;
+  padding-left: 5vh;
+  padding-right: 5vh;
+  mix-blend-mode: hard-light;
 }
 
 #nameRow {
@@ -40,6 +45,7 @@ h1, h2 {
 }
 
 .menu {
+  padding: 1vh;
   margin: 3vh;
   background: radial-gradient(#84563f, #55181c);
   background-blend-mode: hard-light;
@@ -84,4 +90,8 @@ h1, h2 {
 
 .pleaseOneLine {
   display: flex;
+}
+
+.toinvert {
+  filter: invert();
 }

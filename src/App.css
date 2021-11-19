@@ -59,10 +59,15 @@
 }
 
 h1, h2 {
-  background-color: #d78383;
+  background-color: #af453c;
   border-radius: 2vh;
   padding: 2vh;
   padding-left: 5vh;
   padding-right: 5vh;
   mix-blend-mode: hard-light;
+}
+
+.navStyle {
+  font-size: larger;
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.6);
 }

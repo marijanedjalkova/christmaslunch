@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <nav class="row">
+        <nav class="row navStyle">
           <Link to="/" class="col-sm-4">Event Info</Link>
           <Link to="/choose" class="col-sm-4">Submit Food Choices</Link>
           <Link to="/records" class="col-sm-4">What did I choose?</Link>
