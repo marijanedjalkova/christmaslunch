@@ -1,19 +1,20 @@
 .App {
   text-align: center;
-  background-image: url("./images/christmas-background.jpg");
-  background-repeat: no-repeat;
-  background-size: 100vh;
-  background-attachment: fixed;
-  height: 100vh;
+  background: url("./images/christmas-background3.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 
 @media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */
   .App {
-    text-align: center;
-    background-image: url("./images/christmas-background-vertical.jpg");
-    background-repeat: no-repeat;
-    background-size: 100vh;
+    background: url("./images/christmas-background3.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
  }
 @media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
@@ -24,18 +25,20 @@
 }
 @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
   .App {
-    text-align: center;
-    background-image: url("./images/christmas-background3.jpg");
-    background-repeat: no-repeat;
-    background-size: 100vh;
+    background: url("./images/christmas-background3.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
 }
 @media (min-width:1281px) { /* hi-res laptops and desktops */ 
   .App {
-    text-align: center;
-    background-image: url("./images/christmas-background3.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
+    background: url("./images/christmas-background3.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
 }
 

@@ -109,7 +109,6 @@ class FoodChoiceForm extends React.Component {
           name: event.target.value
         }, () => {
             let newName = '' + event.target.value;
-            console.log('name is now: ' + newName);
             
             if (newName.toString().toLowerCase().replaceAll(/\s/g,'') === 'martin'){
                 this.setState({
@@ -120,7 +119,6 @@ class FoodChoiceForm extends React.Component {
                     isMartin: false
                   })
             }
-            console.log(this.state);
         })
         
       } 

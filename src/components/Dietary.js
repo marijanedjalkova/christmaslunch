@@ -25,7 +25,6 @@ function renderIcon(dietaryOption, i) {
   }
 
 function Dietary(diet){
-    console.log(diet)
     return (
         diet.diet.map((option, i)=>{
             return <div class="inline-block">{renderIcon(option, i)}</div>

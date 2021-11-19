@@ -75,7 +75,7 @@ handleSubmit(event) {
 
 render() {
     return (
-      <div style={{ padding: 20 }}>
+      <div class="entirepage">
         <h2>What did I choose?</h2>
         <Form onSubmit={this.handleSubmit}>
         <Form.Group as={Row} id="nameRow">

@@ -22,13 +22,13 @@ export class Choose extends React.Component {
 
   render() {
     return (
-      <div style={{ padding: 20 }}>
+      <div>
         <h2>Please make food choices here:</h2>
         {this.state.submitted ? this.printSuccess() : <div>
           <div class="pleaseOneLine"><Dietary diet={["vegetarian"]} class="inline-block"/><div class="inline-block"> - vegetarian</div></div>
           <div class="pleaseOneLine"><Dietary diet={["vegan"]} class="inline-block" /><div class="inline-block"> - vegan</div></div>
           <div class="pleaseOneLine"><Dietary diet={["GF"]} class="inline-block" /><div class="inline-block"> - gluten free</div></div>
-          <div class="pleaseOneLine"><Dietary diet={["GFavailable"]} class="inline-block" /><div class="inline-block"> - gluen free option available, tick the box when prompted</div></div>
+          <div class="pleaseOneLine"><Dietary diet={["GFavailable"]} class="inline-block" /><div class="inline-block"> - gluten free option available, tick the box when prompted</div></div>
           <FoodChoiceForm onSuccess={this.handleSubmission}/></div>}
       </div>
     );

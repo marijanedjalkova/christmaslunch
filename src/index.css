@@ -95,3 +95,7 @@ h1, h2 {
 .toinvert {
   filter: invert();
 }
+
+.entirepage {
+  height: 100vh;
+}
