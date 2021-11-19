@@ -37,9 +37,12 @@ const findWholeItemFromList = (optionName, optionList) => {
 const printWholeStarter = (dish, dishGF) => {
   var typeOfDish = "Starter";
   let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
-  if (dish == undefined){
+  if (dish == undefined || dish.trim() == "" ){
+    console.log(typeOfDish + " is not there!")
     return (<div>{noChoiceMessage}</div>);
   } 
+  console.log("starter is ");
+  console.log(dish)
   return (
   <div class="course">
           <div class="course-name">{typeOfDish}:</div>
@@ -52,7 +55,7 @@ const printWholeStarter = (dish, dishGF) => {
 const printWholeMain = (dish, dishGF) => {
   var typeOfDish = "Main";
   let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
-  if (dish == undefined){
+  if (dish == undefined || dish.trim() == "" ){
     return (<div>{noChoiceMessage}</div>);
   } 
   return (
@@ -67,7 +70,7 @@ const printWholeMain = (dish, dishGF) => {
 const printWholeDessert = (dish, dishGF) => {
   var typeOfDish = "Dessert";
   let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
-  if (dish == undefined){
+  if (dish == undefined || dish.trim() == "" ){
     return (<div>{noChoiceMessage}</div>);
   } 
   return (
