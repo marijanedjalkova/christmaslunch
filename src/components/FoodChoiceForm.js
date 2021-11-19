@@ -10,12 +10,20 @@ import Dietary from './Dietary';
 import isGFAvailable from './util';
 
 const printOption = (option, i) => {
-    console.log("inside method")
-    console.log(option)
-    let result = (<div key={i}><Radio value={option.option} className="radio-button" />
-    {option.description}<Dietary diet={option.diet}/></div>);
-    console.log(result)
-    return result;
+    return (<div class="course" key={i}><Radio value={option.option} className="radio-button menuEntryItem" />
+    <div class="menuEntryItem">{option.description}</div><Dietary class="menuEntryItem" diet={option.diet}/></div>);
+}
+
+const printGF = (course, courseName, onChangeFunction, changeField) => {
+    if (isGFAvailable(course, courseName)){
+        return (<FormCheck >
+                    <FormCheck.Label>Do you want selected {courseName} Gluten Free?
+                        <FormCheck.Input type="checkbox" onChange={onChangeFunction} checked={changeField}/>
+                    </FormCheck.Label>
+                </FormCheck>)
+    } else {
+        return null;
+    }
 }
 
 class FoodChoiceForm extends React.Component {
@@ -187,7 +195,7 @@ class FoodChoiceForm extends React.Component {
                 </Form.Label>
                 <Col sm={6}>
                 <Form.Control 
-                    type="text" placeholder="Name" 
+                    type="text" placeholder="First Name" 
                     value={this.state.name} onChange={this.updateName}/>
                     <span className="error">{this.state.errors["name"]}</span>
                 </Col>
@@ -199,12 +207,7 @@ class FoodChoiceForm extends React.Component {
                 <RadioGroup name="starters" selectedValue={this.state.starter} onChange={this.updateStarter}>
                 {choices.starters.map((option, i)=>{ return printOption(option, i)})}
                 </RadioGroup>
-                {isGFAvailable(this.state.starter, "starter") && ( 
-                    <FormCheck >
-                        <FormCheck.Label>Do you want selected starter Gluten Free?
-                            <FormCheck.Input type="checkbox" onChange={this.updateStarterGF} checked={this.state.starterGF}/>
-                        </FormCheck.Label>
-                    </FormCheck> )}
+                {printGF(this.state.starter, "starter", this.updateStarterGF, this.state.starterGF)}
                 </Row>
             </Form.Group>
             <Form.Group>
@@ -213,12 +216,7 @@ class FoodChoiceForm extends React.Component {
                 <RadioGroup name="mains" selectedValue={this.state.main} onChange={this.updateMain}>
                 {choices.mains.map((option, i)=>{return printOption(option, i)})}
                 </RadioGroup>
-                {isGFAvailable(this.state.main, "main") && ( 
-                    <FormCheck >
-                        <FormCheck.Label>Do you want selected main Gluten Free?
-                            <FormCheck.Input type="checkbox" onChange={this.updateMainGF} checked={this.state.mainGF}/>
-                        </FormCheck.Label>
-                    </FormCheck> )}
+                {printGF(this.state.main, "main", this.updateMainGF, this.state.mainGF)}
                 </Col>
             </Form.Group>
             <Form.Group>
@@ -227,12 +225,7 @@ class FoodChoiceForm extends React.Component {
                 <RadioGroup name="desserts" selectedValue={this.state.dessert} onChange={this.updateDessert}>
                 {choices.desserts.map((option, i)=>{return printOption(option, i)})}
                 </RadioGroup>
-                {isGFAvailable(this.state.dessert, "dessert") && ( 
-                    <FormCheck >
-                        <FormCheck.Label>Do you want selected dessert Gluten Free?
-                            <FormCheck.Input type="checkbox" onChange={this.updateDessertGF} checked={this.state.dessertGF}/>
-                        </FormCheck.Label>
-                    </FormCheck> )}
+                {printGF(this.state.dessert, "dessert", this.updateDessertGF, this.state.dessertGF)}
                 </Col>
             </Form.Group>
             </div>

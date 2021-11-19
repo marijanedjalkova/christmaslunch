@@ -1,15 +1,18 @@
 import React from 'react';
 import choices  from './consts';
-import './RecordView.css';
 
-const printGF = (booleanToPrint) =>{
+const printGF = (booleanToPrint, optionCourse, optionName) =>{
   if (booleanToPrint == undefined){
     return null;
   }
-  if (booleanToPrint){
-    return (<div>GF</div>)
+  var needToPrint = findWholeItemFromList(optionName, choices[optionCourse]).diet.includes("GFavailable");
+  if (!needToPrint){
+    return null;
   }
-  return (<div>NOT GF</div>);
+  if (booleanToPrint){
+    return (<div>(GF)</div>)
+  }
+  return (<div>(NOT GF)</div>);
 }
 
 const printStarter = (optionName) => {
@@ -25,8 +28,11 @@ const printDessert = (optionName) => {
 }
 
 const findDescriptionFromList = (optionName, optionList) => {
-    return optionList.find(element => {return element.option === optionName}).description;
+    return findWholeItemFromList(optionName, optionList).description;
 }
+
+const findWholeItemFromList = (optionName, optionList) => {
+  return optionList.find(element => {return element.option === optionName})}
 
 class RecordView extends React.Component {
 
@@ -42,17 +48,17 @@ class RecordView extends React.Component {
         <div class="course">
           <div class="course-name">Starter:</div>
           <div class="course-value">{printStarter(this.props.data.starter)}</div>
-          <div class="course-value">{printGF(this.props.data.starterGF)}</div>
+          <div class="course-value">{printGF(this.props.data.starterGF, "starters", this.props.data.starter)}</div>
         </div>
         <div class="course">
           <div class="course-name">Main:</div>
           <div class="course-value">{printMain(this.props.data.main)}</div>
-          <div class="course-value">{printGF(this.props.data.mainGF)}</div>
+          <div class="course-value">{printGF(this.props.data.mainGF, "mains", this.props.data.main)}</div>
         </div>
         <div class="course">
           <div class="course-name">Dessert:</div>
           <div class="course-value">{printDessert(this.props.data.dessert)}</div>
-          <div class="course-value">{printGF(this.props.data.dessertGF)}</div>
+          <div class="course-value">{printGF(this.props.data.dessertGF, "desserts", this.props.data.dessert)}</div>
         </div>
       </div>
     )

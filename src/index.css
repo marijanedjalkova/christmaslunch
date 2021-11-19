@@ -61,4 +61,27 @@ h1, h2 {
 
 .course-value {
   font-style: italic;
+  margin: 1vh;
+}
+
+.course {
+  display: flex;
+}
+
+.onSameLine {
+  display: inline-block;
+}
+
+.menuEntryItem {
+  display: inline-block;
+  margin: 2px;
+}
+
+.gfAvailable {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.pleaseOneLine {
+  display: flex;
 }

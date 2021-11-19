@@ -85,7 +85,7 @@ render() {
                 </Form.Label>
                 <Col sm={4}>
                 <Form.Control 
-                    type="text" placeholder="Name" 
+                    type="text" placeholder="First Name" 
                     value={this.state.name} onChange={this.updateName}/>
                 </Col>
             </Form.Group>
