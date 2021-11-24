@@ -73,8 +73,14 @@ class FoodChoiceForm extends React.Component {
     printToppings = (optionName, courseName, onChangeFunction) => {
         let toppings = getToppings(optionName, courseName)
         if (toppings !== undefined && toppings.length !== 0){
-            return (toppings.map((toppingName, i) => {
-                return <CheckBox key={i} value={toppingName} description={toppingName} type="checkbox" handleCheckChildElement={(e) => onChangeFunction(optionName, courseName, e)} checkDisabled={!this.state[courseName + "s"].find(e => e.option === optionName)} menupart={courseName}/>}))
+            return (
+                <div class="col-sm-4 extra-info">
+                <span class="underlined">Toppings:</span>
+                {toppings.map((toppingName, i) => {
+                return <CheckBox key={i} value={toppingName} description={toppingName} type="checkbox" handleCheckChildElement={(e) => onChangeFunction(optionName, courseName, e)} checkDisabled={!this.state[courseName + "s"].find(e => e.option === optionName)} menupart={courseName}/>})
+                }
+                </div>
+            )
         } else {
             return null;
         }
@@ -84,7 +90,8 @@ class FoodChoiceForm extends React.Component {
         let crumbs = getCrumbs(optionName, courseName)
         if (crumbs !== undefined && crumbs.length !== 0){
             return (
-                <div >
+                <div class="col-sm-4 extra-info">
+                <span class="underlined">Crumbs:</span>
                 {crumbs.map((crumbName, i) => {
                 let optionWithCrumb = this.state[courseName + "s"].find(e => e.option === optionName)
                 let isChecked = optionWithCrumb!== undefined && optionWithCrumb.crumb === crumbName

@@ -103,3 +103,12 @@ h1, h2 {
 .no-list-style{
   list-style: none;
 }
+
+.extra-info {
+  text-align: left;
+  margin-left: 3vh;
+}
+
+.underlined {
+  text-decoration: underline;
+}
