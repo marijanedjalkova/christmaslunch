@@ -30,5 +30,10 @@ function getMenuByType(itemtype){
     return menu.some(starter => (starter.option === item && starter.diet.includes("VEGANavailable")));
 }
 
-export {isGFAvailable, isVegetarianAvailable, isVeganAvailable}
+function getToppings(item, itemtype){
+    const menu = getMenuByType(itemtype);
+    return menu.find(starter => (starter.option === item)).toppings;
+}
+
+export {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings}
 

@@ -4,17 +4,18 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import FormCheck from "react-bootstrap/FormCheck";
+import InputGroup from "react-bootstrap/InputGroup"
 import { Radio, RadioGroup} from 'react-radio-group'
 import choices  from './consts';
 import Dietary from './Dietary';
-import {isGFAvailable, isVegetarianAvailable, isVeganAvailable} from './util';
+import {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings} from './util';
 import  CheckBox  from './CheckBox';
 
 class FoodChoiceForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { name: "", starters: [], mains: [], desserts: [], macaroni: [], breads: [], burgers: [], loadedFries: [], sides: [], 
-    isMartin: false, errors: {} };
+        this.state = { name: "", starters: [], mains: [], desserts: [], macaronis: [], breads: [], burgers: [], loadedFriess: [], sides: [], 
+        isMartin: false, errors: {} };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateName = this.updateName.bind(this);
 
@@ -23,10 +24,12 @@ class FoodChoiceForm extends React.Component {
         this.changeGF = this.changeGF.bind(this);
         this.changeVegetarian = this.changeVegetarian.bind(this);
         this.changeVegan = this.changeVegan.bind(this);
+        this.changeToppings = this.changeToppings.bind(this);
 
         this.printGF = this.printGF.bind(this);
         this.printVegetarian = this.printVegetarian.bind(this);
         this.printVegan = this.printVegan.bind(this);
+        this.printToppings = this.printToppings.bind(this);
       }
 
       printGF = (optionName, courseName, onChangeFunction) => {
@@ -64,6 +67,16 @@ class FoodChoiceForm extends React.Component {
             return null;
         }
     }
+
+    printToppings = (optionName, courseName, onChangeFunction) => {
+        let toppings = getToppings(optionName, courseName)
+        if (toppings !== undefined && toppings.length !== 0){
+            return (toppings.map((toppingName, i) => {
+                return <CheckBox key={i} value={toppingName} description={toppingName} type="checkbox" handleCheckChildElement={(e) => onChangeFunction(optionName, courseName, e)} checkDisabled={!this.state[courseName + "s"].find(e => e.option === optionName)} menupart={courseName}/>}))
+        } else {
+            return null;
+        }
+    }
       
       printOptionAsCheck = (option, i, menupart) => {
         return (<div class="course" key={i}><CheckBox value={option.option} description={option.description} className="radio-button menuEntryItem" handleCheckChildElement={this.handleCheckChildElement} menupart={menupart}/>
@@ -71,6 +84,7 @@ class FoodChoiceForm extends React.Component {
         {this.printGF(option.option, menupart, this.changeGF) } 
         {this.printVegetarian(option.option, menupart, this.changeVegetarian) } 
         {this.printVegan(option.option, menupart, this.changeVegan) } 
+        {this.printToppings(option.option, menupart, this.changeToppings) } 
         </div>  
     );
     }
@@ -93,6 +107,19 @@ class FoodChoiceForm extends React.Component {
         const menuChoiceName = courseName + "s"
         let items = [...this.state[menuChoiceName]]
         items.map((item) => {if (item.option === dishName) {item.vegan = event.target.checked}})
+        this.setState({[menuChoiceName] : items}, () => {console.log(this.state)})
+    }
+
+    changeToppings = (dishName, courseName, event) => {
+        let chosenTopping = event.target.value;
+        const menuChoiceName = courseName + "s"
+        let items = [...this.state[menuChoiceName]]
+        let itemToppings = items.find(e => e.option === dishName).toppings
+        if (itemToppings === undefined){
+            itemToppings = []
+        }
+        itemToppings = itemToppings.concat(chosenTopping)
+        items.map(e => {if (e.option === dishName){ e.toppings = itemToppings }})
         this.setState({[menuChoiceName] : items}, () => {console.log(this.state)})
     }
 
@@ -224,31 +251,62 @@ class FoodChoiceForm extends React.Component {
                     </ul>
                 </Row>
             </Form.Group>
-            {/* <Form.Group >
+            <Form.Group >
                 <Form.Label class="course-name">Mains:</Form.Label>
                 <Row> 
                     <ul> 
                         {choices.mains.map((option, i)=>{ return this.printOptionAsCheck(option, i, "main")})}
                     </ul>
                 </Row>
-            </Form.Group> */}
-            {/* <Form.Group>
-                <Form.Label class="course-name">Select a Main:</Form.Label>
-                <Col>
-                <RadioGroup name="mains" selectedValue={this.state.main} onChange={this.updateMain}>
-                {choices.mains.map((option, i)=>{return printOption(option, i)})}
-                </RadioGroup>
-                {printGF(this.state.main, "main", this.updateMainGF, this.state.mainGF)}
-                </Col>
             </Form.Group>
-            <Form.Group>
-                <Form.Label class="course-name">Select a Dessert:</Form.Label>
-                <Col>
-                <RadioGroup name="desserts" selectedValue={this.state.dessert} onChange={this.updateDessert}>
-                {choices.desserts.map((option, i)=>{return printOption(option, i)})}
-                </RadioGroup>
-                {printGF(this.state.dessert, "dessert", this.updateDessertGF, this.state.dessertGF)}
-                </Col>
+            <Form.Group >
+                <Form.Label class="course-name">Breads:</Form.Label>
+                <Row> 
+                    <ul> 
+                        {choices.breads.map((option, i)=>{ return this.printOptionAsCheck(option, i, "bread")})}
+                    </ul>
+                </Row>
+            </Form.Group>
+            <Form.Group >
+                <Form.Label class="course-name">Macaroni:</Form.Label>
+                <Row> 
+                    <ul> 
+                        {choices.macaroni.map((option, i)=>{ return this.printOptionAsCheck(option, i, "macaroni")})}
+                    </ul>
+                </Row>
+            </Form.Group>
+            {/* 
+             <Form.Group >
+                <Form.Label class="course-name">Burgers:</Form.Label>
+                <Row> 
+                    <ul> 
+                        {choices.burgers.map((option, i)=>{ return this.printOptionAsCheck(option, i, "burger")})}
+                    </ul>
+                </Row>
+            </Form.Group>
+            <Form.Group >
+                <Form.Label class="course-name">Loaded Fries:</Form.Label>
+                <Row> 
+                    <ul> 
+                        {choices.loadedFries.map((option, i)=>{ return this.printOptionAsCheck(option, i, "loadedFries")})}
+                    </ul>
+                </Row>
+            </Form.Group>
+            <Form.Group >
+                <Form.Label class="course-name">Sides:</Form.Label>
+                <Row> 
+                    <ul> 
+                        {choices.sides.map((option, i)=>{ return this.printOptionAsCheck(option, i, "side")})}
+                    </ul>
+                </Row>
+            </Form.Group>
+            <Form.Group >
+                <Form.Label class="course-name">Desserts:</Form.Label>
+                <Row> 
+                    <ul> 
+                        {choices.desserts.map((option, i)=>{ return this.printOptionAsCheck(option, i, "dessert")})}
+                    </ul>
+                </Row>
             </Form.Group> */}
             </div>
             <Button
