@@ -291,12 +291,11 @@ class FoodChoiceForm extends React.Component {
                 <Form.Label class="course-name">Macaroni:</Form.Label>
                 <Row> 
                     <ul> 
-                        {choices.macaroni.map((option, i)=>{ return this.printOptionAsCheck(option, i, "macaroni")})}
+                        {choices.macaronis.map((option, i)=>{ return this.printOptionAsCheck(option, i, "macaroni")})}
                     </ul>
                 </Row>
             </Form.Group>
-            {/* 
-             <Form.Group >
+            <Form.Group >
                 <Form.Label class="course-name">Burgers:</Form.Label>
                 <Row> 
                     <ul> 
@@ -308,7 +307,7 @@ class FoodChoiceForm extends React.Component {
                 <Form.Label class="course-name">Loaded Fries:</Form.Label>
                 <Row> 
                     <ul> 
-                        {choices.loadedFries.map((option, i)=>{ return this.printOptionAsCheck(option, i, "loadedFries")})}
+                        {choices.loadedFriess.map((option, i)=>{ return this.printOptionAsCheck(option, i, "loadedFries")})}
                     </ul>
                 </Row>
             </Form.Group>
@@ -320,14 +319,14 @@ class FoodChoiceForm extends React.Component {
                     </ul>
                 </Row>
             </Form.Group>
-            <Form.Group >
+             <Form.Group >
                 <Form.Label class="course-name">Desserts:</Form.Label>
                 <Row> 
                     <ul> 
                         {choices.desserts.map((option, i)=>{ return this.printOptionAsCheck(option, i, "dessert")})}
                     </ul>
                 </Row>
-            </Form.Group> */}
+            </Form.Group>
             </div>
             <Button
                 column="true"

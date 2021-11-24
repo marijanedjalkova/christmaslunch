@@ -46,8 +46,8 @@ const breadChoices = [
 ];
 
 const loadedFriesChoices = [
-  {option: "skinny-loaded-fries", toppings: ["salt & chilli (vegetarian, GF)", "katsu curry sauce (GF)", "cheese & gravy", "beef chilli & jalapenos", "macaroni cheese (vegetarian)"], description: "Skinny Loaded Fries"},
-  {option: "chunky-loaded-fries", toppings: ["salt & chilli (vegetarian, GF)", "katsu curry sauce (GF)", "cheese & gravy", "beef chilli & jalapenos", "macaroni cheese (vegetarian)"], description: "Chunky Chips Loaded Fries"}
+  {option: "skinny-loaded-fries", diet:[], toppings: ["salt & chilli (vegetarian, GF)", "katsu curry sauce (GF)", "cheese & gravy", "beef chilli & jalapenos", "macaroni cheese (vegetarian)"], description: "Skinny Loaded Fries"},
+  {option: "chunky-loaded-fries", diet:[], toppings: ["salt & chilli (vegetarian, GF)", "katsu curry sauce (GF)", "cheese & gravy", "beef chilli & jalapenos", "macaroni cheese (vegetarian)"], description: "Chunky Chips Loaded Fries"}
 ];
 
 const sidesChoices = [
@@ -67,6 +67,6 @@ const dessertChoices = [
   { option: "sorbet", diet : [], description: "Sorbet & Mixed berries"}
 ];
 
-const choices = {starters: starterChoices, mains: mainChoices, desserts: dessertChoices, macaroni: macaroniChoices, burgers: burgerChoices, breads: breadChoices, loadedFries: loadedFriesChoices, sides: sidesChoices}
+const choices = {starters: starterChoices, mains: mainChoices, desserts: dessertChoices, macaronis: macaroniChoices, burgers: burgerChoices, breads: breadChoices, loadedFriess: loadedFriesChoices, sides: sidesChoices}
 
 export default choices;

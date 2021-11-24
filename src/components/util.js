@@ -6,8 +6,8 @@ function getMenuByType(itemtype){
         case 'main': return choices.mains;
         case 'dessert': return choices.desserts;
         case 'bread': return choices.breads;
-        case 'macaroni': return choices.macaroni;
-        case 'loadedFries': return choices.loadedFries;
+        case 'macaroni': return choices.macaronis;
+        case 'loadedFries': return choices.loadedFriess;
         case 'burger': return choices.burgers;
         case 'side': return choices.sides;
         default:
@@ -17,17 +17,17 @@ function getMenuByType(itemtype){
 
  function isGFAvailable(item, itemtype){
     const menu = getMenuByType(itemtype);
-    return menu.some(starter => (starter.option === item && starter.diet.includes("GFavailable")));
+    return menu.some(starter => (starter.option === item && starter.diet !== undefined && starter.diet.includes("GFavailable")));
 }
 
  function isVegetarianAvailable(item, itemtype){
     const menu = getMenuByType(itemtype);
-    return menu.some(starter => (starter.option === item && starter.diet.includes("VEGETARIANavailable")));
+    return menu.some(starter => (starter.option === item && starter.diet !== undefined && starter.diet.includes("VEGETARIANavailable")));
 }
 
  function isVeganAvailable(item, itemtype){
     const menu = getMenuByType(itemtype);
-    return menu.some(starter => (starter.option === item && starter.diet.includes("VEGANavailable")));
+    return menu.some(starter => (starter.option === item && starter.diet !== undefined && starter.diet.includes("VEGANavailable")));
 }
 
 function getToppings(item, itemtype){
