@@ -39,7 +39,7 @@ const burgerChoices = [
 ];
 
 const breadChoices = [
-  {option: "steak-break", diet: ["GFavailable"], description: "Minute steak, caramelised onion, garlic mayo, foccacia"},
+  {option: "steak-bread", diet: ["GFavailable"], description: "Minute steak, caramelised onion, garlic mayo, foccacia"},
   {option: "chicken-pesto", diet: ["GFavailable"], description: "Chicken, mozzarella, pesto, ciabatta"},
   {option: "caprese-foccacia", diet: ["vegetarian", "GFavailable"], description: "Caprese foccacia"},
   {option: "christmas-bread", diet: ["GFavailable"], description: "Christmas Piece and Chips"}

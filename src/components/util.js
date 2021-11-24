@@ -11,7 +11,7 @@ function getMenuByType(itemtype){
         case 'burger': return choices.burgers;
         case 'side': return choices.sides;
         default:
-          return choices.starters;
+          return null;
       }
 }
 

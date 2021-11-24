@@ -9,9 +9,8 @@ import './Record.css';
 class Records extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { name: "", starter: "", starterGF: false, main: "", mainGF: false, 
-    dessert: "", dessertGF: false, isMartin: false,
-    resultReceived: false };
+    this.state = { name: "", starters: [], mains: [], desserts: [], macaronis: [], breads: [], burgers: [], loadedFriess: [], sides: [], 
+        isMartin: false,resultReceived: false };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateName = this.updateName.bind(this);
   }
@@ -22,8 +21,6 @@ updateName(event) {
     name: event.target.value
   }, () => {
       let newName = '' + event.target.value;
-      console.log('name is now: ' + newName);
-      
       if (newName.toString().toLowerCase().replaceAll(/\s/g,'') === 'martin'){
           this.setState({
               isMartin: true
@@ -33,13 +30,11 @@ updateName(event) {
               isMartin: false
             })
       }
-      console.log(this.state);
   })
 }
 
 handleSubmit(event) {
   event.preventDefault();
-  console.log(this.state);
   fetch('https://28uc5uo954.execute-api.us-east-2.amazonaws.com/dev/lunchperson?name=' + this.state.name, {
     method: 'GET'
   })
@@ -47,13 +42,14 @@ handleSubmit(event) {
       if (!res.ok) { throw res }
       return res.json()})
     .then(json => {
-      console.log(json);
-      this.setState({starter: json.starter,
-                     starterGF: json.starterGF,
-                     main: json.main,
-                     mainGF: json.mainGF,
-                     dessert: json.dessert,
-                     dessertGF: json.dessertGF,
+      this.setState({starters: json.starters,
+                     mains: json.mains,
+                     desserts: json.desserts,
+                     macaronis: json.macaronis,
+                     burgers: json.burgers,
+                     breads: json.breads,
+                     loadedFriess: json.loadedFriess,
+                     sides: json.sides,
                      resultReceived: true,
                      isError: false,
                      errorMessage : undefined

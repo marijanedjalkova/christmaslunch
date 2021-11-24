@@ -99,3 +99,7 @@ h1, h2 {
 .entirepage {
   height: 100vh;
 }
+
+.no-list-style{
+  list-style: none;
+}

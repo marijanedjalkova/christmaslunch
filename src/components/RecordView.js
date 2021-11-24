@@ -1,11 +1,12 @@
 import React from 'react';
 import choices  from './consts';
+import {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings, getCrumbs} from './util';
 
-const printGF = (booleanToPrint, optionCourse, optionName) =>{
+const printGF = (booleanToPrint, optionCourse, option) =>{
   if (booleanToPrint === undefined){
     return null;
   }
-  var needToPrint = findWholeItemFromList(optionName, choices[optionCourse]).diet.includes("GFavailable");
+  let needToPrint = isGFAvailable(option.option, optionCourse)
   if (!needToPrint){
     return null;
   }
@@ -15,36 +16,59 @@ const printGF = (booleanToPrint, optionCourse, optionName) =>{
   return (<div>(NOT GF)</div>);
 }
 
-const printStarter = (optionName) => {
-  return findDescriptionFromList(optionName, choices.starters);
+const printVegetarian = (option, optionCourse) =>{
+  if (option.vegetarian === undefined){
+    return null;
+  }
+  let needToPrint = isVegetarianAvailable(option.option, optionCourse)
+  if (!needToPrint){
+    return null;
+  }
+  if (option.vegetarian){
+    return (<div>(vegetarian)</div>)
+  }
+  return (<div>(NOT vegetarian)</div>);
 }
 
-const printMain = (optionName) => {
-  return findDescriptionFromList(optionName, choices.mains);
+const printVegan = (option, optionCourse, optionName) =>{
+  if (option.vegan === undefined){
+    return null;
+  }
+  let needToPrint = isVeganAvailable(option.option, optionCourse)
+  if (!needToPrint){
+    return null;
+  }
+  if (option.vegan){
+    return (<div>(vegan)</div>)
+  }
+  return (<div>(NOT vegan)</div>);
 }
 
-const printDessert = (optionName) => {
-  return findDescriptionFromList(optionName, choices.desserts);
+const printToppings = (dish, optionCourse) =>{
+  if (dish.toppings === undefined || dish.toppings.length === 0 ){
+    return null;
+  }
+  let needToPrint = getToppings(dish.option, optionCourse) !== undefined 
+  if (!needToPrint){
+    return null;
+  }
+  return (<div>Toppings: {dish.toppings.join()}</div>);
 }
 
-const printMacaroni = (optionName, toppings, crumb) => {
-  return findDescriptionFromList(optionName, choices.macaroni) + ", toppings: " + toppings.toString() + ", crumb: " + crumb;
+const printCrumb = (dish, optionCourse) =>{
+  if (dish.crumb === undefined || dish.crumb.trim() === "" ){
+    return null;
+  }
+  let needToPrint = getCrumbs(dish.option, optionCourse) !== undefined 
+  if (!needToPrint){
+    console.log("no need to print", dish.option, optionCourse, getCrumbs(dish.option, optionCourse))
+    return null;
+  }
+  return (<div>Crumb: {dish.crumb}</div>);
 }
 
-const printBread = (optionName) => {
-  return findDescriptionFromList(optionName, choices.breads);
-}
-
-const printBurger = (optionName) => {
-  return findDescriptionFromList(optionName, choices.burgers);
-}
-
-const printLoadedFries = (optionName) => {
-  return findDescriptionFromList(optionName, choices.loadedFries);
-}
-
-const printSide = (optionName) => {
-  return findDescriptionFromList(optionName, choices.sides);
+const printDish = (option, courseName) => {
+  return findDescriptionFromList(option.option, choices[courseName + "s"]);
 }
 
 const findDescriptionFromList = (optionName, optionList) => {
@@ -52,125 +76,42 @@ const findDescriptionFromList = (optionName, optionList) => {
 }
 
 const findWholeItemFromList = (optionName, optionList) => {
-  return optionList.find(element => {return element.option === optionName})}
-
-const printWholeStarter = (dish, dishGF) => {
-  var typeOfDish = "Starter";
-  let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
-  if (dish === undefined || dish.trim() === "" ){
-    console.log(typeOfDish + " is not there!")
-    return (<div>{noChoiceMessage}</div>);
-  } 
-  console.log("starter is ");
-  console.log(dish)
-  return (
-  <div class="course">
-          <div class="course-name">{typeOfDish}:</div>
-          <div class="course-value">{printStarter(dish)}</div>
-          <div class="course-value">{printGF(dishGF, "starters", dish)}</div>
-        </div>
-  )
+  return optionList.find(element => {return element.option === optionName})
 }
 
-const printWholeMain = (dish, dishGF) => {
-  var typeOfDish = "Main";
-  let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
-  if (dish === undefined || dish.trim() === "" ){
+const printWholeCourse = (dishes, courseNameSingle) => {
+  let courseNameHumanReadable = courseNameSingle
+  if (courseNameHumanReadable === "loadedFries"){
+    courseNameHumanReadable = "loaded fries"
+  }
+  let courseNameMultipleHR = courseNameHumanReadable + "s"
+  if (courseNameMultipleHR === "macaronis"){
+    courseNameMultipleHR = "macaroni"
+  }
+  if (courseNameMultipleHR === "loaded friess"){
+    courseNameMultipleHR = "loaded fries"
+  }
+  let noChoiceMessage = "You did not choose any " + courseNameMultipleHR + "!";
+  if (dishes === undefined || dishes.length === 0 ){
     return (<div>{noChoiceMessage}</div>);
   } 
   return (
   <div class="course">
-          <div class="course-name">{typeOfDish}:</div>
-          <div class="course-value">{printMain(dish)}</div>
-          <div class="course-value">{printGF(dishGF, "mains", dish)}</div>
+    <div class="course-name">{courseNameMultipleHR}:</div>
+    {dishes.map((dish, i) => {
+      return (
+        <div>
+        <div class="course-value">{printDish(dish, courseNameSingle)}</div>
+        <div class="course-value">{printGF(dish.GF, courseNameSingle, dish)}</div> 
+        <div class="course-value">{printVegetarian(dish, courseNameSingle)}</div> 
+        <div class="course-value">{printVegan(dish, courseNameSingle)}</div> 
+        <div class="course-value">{printToppings(dish, courseNameSingle)}</div> 
+        <div class="course-value">{printCrumb(dish, courseNameSingle)}</div> 
         </div>
-  )
-}
-
-const printWholeDessert = (dish, dishGF) => {
-  var typeOfDish = "Dessert";
-  let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
-  if (dish === undefined || dish.trim() === "" ){
-    return (<div>{noChoiceMessage}</div>);
-  } 
-  return (
-  <div class="course">
-          <div class="course-name">{typeOfDish}:</div>
-          <div class="course-value">{printDessert(dish)}</div>
-          <div class="course-value">{printGF(dishGF, "desserts", dish)}</div>
-        </div>
-  )
-}
-
-const printWholeMacaroni = (dish, toppings, crumb) => {
-  var typeOfDish = "Macaroni";
-  let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
-  if (dish === undefined || dish.trim() === "" ){
-    return (<div>{noChoiceMessage}</div>);
-  } 
-  return (
-  <div class="course">
-          <div class="course-name">{typeOfDish}:</div>
-          <div class="course-value">{printMacaroni(dish, toppings, crumb)}</div>
-        </div>
-  )
-}
-
-const printWholeBread = (dish, dishGF) => {
-  var typeOfDish = "Bread";
-  let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
-  if (dish === undefined || dish.trim() === "" ){
-    return (<div>{noChoiceMessage}</div>);
-  } 
-  return (
-  <div class="course">
-          <div class="course-name">{typeOfDish}:</div>
-          <div class="course-value">{printBread(dish)}</div>
-          <div class="course-value">{printGF(dishGF, "breads", dish)}</div>
-        </div>
-  )
-}
-
-const printWholeBurger = (dish, dishGF) => {
-  var typeOfDish = "Burger";
-  let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
-  if (dish === undefined || dish.trim() === "" ){
-    return (<div>{noChoiceMessage}</div>);
-  } 
-  return (
-  <div class="course">
-          <div class="course-name">{typeOfDish}:</div>
-          <div class="course-value">{printBurger(dish)}</div>
-          <div class="course-value">{printGF(dishGF, "burgers", dish)}</div>
-        </div>
-  )
-}
-
-const printWholeLoadedFries = (dish) => {
-  var typeOfDish = "Loaded Fries";
-  let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
-  if (dish === undefined || dish.trim() === "" ){
-    return (<div>{noChoiceMessage}</div>);
-  } 
-  return (
-  <div class="course">
-          <div class="course-name">{typeOfDish}:</div>
-          <div class="course-value">{printLoadedFries(dish)}</div>
-        </div>
-  )
-}
-
-const printWholeSides = (dishes) => {
-  var typeOfDish = "Side(s)";
-  let noChoiceMessage = "You did not choose a " + typeOfDish + "!";
-  if (dishes === undefined || dishes === [] ){
-    return (<div>{noChoiceMessage}</div>);
-  } 
-  return (
-  <div class="course">
-          <div class="course-name">{typeOfDish}:</div>
-          <div class="course-value">{dishes.map(dish => printSide(dish))}</div>
-        </div>
+      )
+    }
+    )}
+  </div>
   )
 }
 
@@ -185,14 +126,14 @@ class RecordView extends React.Component {
     }
     return (
       <div class="menu">
-        {printWholeStarter(this.props.data.starter, this.props.data.starterGF)}
-        {printWholeMacaroni(this.props.data.macaroni, this.props.data.macaroniToppings, this.props.data.macaroniCrumb)}
-        {printWholeBread(this.props.data.breads)}
-        {printWholeBurger(this.props.data.burger, this.props.data.burgerGF)}
-        {printWholeLoadedFries(this.props.data.loadedFries)}
-        {printWholeSides(this.props.data.sides)} 
-        {printWholeMain(this.props.data.main, this.props.data.mainGF)}
-        {printWholeDessert(this.props.data.dessert, this.props.data.dessertGF)}
+        {printWholeCourse(this.props.data.starters, "starter")}
+        {printWholeCourse(this.props.data.macaronis, "macaroni")}
+        {printWholeCourse(this.props.data.breads, "bread")}
+        {printWholeCourse(this.props.data.burgers, "burger")}
+        {printWholeCourse(this.props.data.mains, "main")}
+        {printWholeCourse(this.props.data.loadedFriess, "loadedFries")}
+        {printWholeCourse(this.props.data.sides, "side")} 
+        {printWholeCourse(this.props.data.desserts, "dessert")}
       </div>
     )
   }

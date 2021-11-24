@@ -4,12 +4,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import FormCheck from "react-bootstrap/FormCheck";
-import InputGroup from "react-bootstrap/InputGroup"
 import { Radio, RadioGroup} from 'react-radio-group'
 import choices  from './consts';
 import Dietary from './Dietary';
 import {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings, getCrumbs} from './util';
 import  CheckBox  from './CheckBox';
+import  RadioBox  from './RadioBox';
 
 class FoodChoiceForm extends React.Component {
     constructor(props) {
@@ -83,8 +83,15 @@ class FoodChoiceForm extends React.Component {
     printCrumbs = (optionName, courseName, onChangeFunction) => {
         let crumbs = getCrumbs(optionName, courseName)
         if (crumbs !== undefined && crumbs.length !== 0){
-            return (crumbs.map((crumbName, i) => {
-                return <CheckBox key={i} value={crumbName} description={crumbName} type="checkbox" handleCheckChildElement={(e) => onChangeFunction(optionName, courseName, e)} checkDisabled={!this.state[courseName + "s"].find(e => e.option === optionName)} menupart={courseName}/>}))
+            return (
+                <div >
+                {crumbs.map((crumbName, i) => {
+                let optionWithCrumb = this.state[courseName + "s"].find(e => e.option === optionName)
+                let isChecked = optionWithCrumb!== undefined && optionWithCrumb.crumb === crumbName
+                return <RadioBox key={i} value={crumbName} description={crumbName} onValueChange={(e) => onChangeFunction(optionName, courseName, e)} checkDisabled={!this.state[courseName + "s"].find(e => e.option === optionName)} menupart={courseName} checked={isChecked}/>})
+                }
+                </div>
+            )
         } else {
             return null;
         }
@@ -176,10 +183,10 @@ class FoodChoiceForm extends React.Component {
             "starters": this.state.starters,
             "mains": this.state.mains,
             "desserts": this.state.desserts,
-            "macaroni": this.state.macaroni,
+            "macaronis": this.state.macaronis,
             "breads": this.state.breads,
             "burgers": this.state.burgers,
-            "loadedFries": this.state.loadedFries,
+            "loadedFriess": this.state.loadedFriess,
             "sides": this.state.sides,
         };
       fetch('https://28uc5uo954.execute-api.us-east-2.amazonaws.com/dev/lunchperson', {
@@ -266,7 +273,7 @@ class FoodChoiceForm extends React.Component {
             <Form.Group >
                 <Form.Label class="course-name">Starters:</Form.Label>
                 <Row> 
-                    <ul> 
+                    <ul class="no-list-style"> 
                         {choices.starters.map((option, i)=>{ return this.printOptionAsCheck(option, i, "starter")})}
                     </ul>
                 </Row>
@@ -274,7 +281,7 @@ class FoodChoiceForm extends React.Component {
             <Form.Group >
                 <Form.Label class="course-name">Mains:</Form.Label>
                 <Row> 
-                    <ul> 
+                    <ul class="no-list-style"> 
                         {choices.mains.map((option, i)=>{ return this.printOptionAsCheck(option, i, "main")})}
                     </ul>
                 </Row>
@@ -282,7 +289,7 @@ class FoodChoiceForm extends React.Component {
             <Form.Group >
                 <Form.Label class="course-name">Breads:</Form.Label>
                 <Row> 
-                    <ul> 
+                    <ul class="no-list-style"> 
                         {choices.breads.map((option, i)=>{ return this.printOptionAsCheck(option, i, "bread")})}
                     </ul>
                 </Row>
@@ -290,7 +297,7 @@ class FoodChoiceForm extends React.Component {
             <Form.Group >
                 <Form.Label class="course-name">Macaroni:</Form.Label>
                 <Row> 
-                    <ul> 
+                    <ul class="no-list-style"> 
                         {choices.macaronis.map((option, i)=>{ return this.printOptionAsCheck(option, i, "macaroni")})}
                     </ul>
                 </Row>
@@ -298,7 +305,7 @@ class FoodChoiceForm extends React.Component {
             <Form.Group >
                 <Form.Label class="course-name">Burgers:</Form.Label>
                 <Row> 
-                    <ul> 
+                    <ul class="no-list-style"> 
                         {choices.burgers.map((option, i)=>{ return this.printOptionAsCheck(option, i, "burger")})}
                     </ul>
                 </Row>
@@ -306,7 +313,7 @@ class FoodChoiceForm extends React.Component {
             <Form.Group >
                 <Form.Label class="course-name">Loaded Fries:</Form.Label>
                 <Row> 
-                    <ul> 
+                    <ul class="no-list-style"> 
                         {choices.loadedFriess.map((option, i)=>{ return this.printOptionAsCheck(option, i, "loadedFries")})}
                     </ul>
                 </Row>
@@ -314,7 +321,7 @@ class FoodChoiceForm extends React.Component {
             <Form.Group >
                 <Form.Label class="course-name">Sides:</Form.Label>
                 <Row> 
-                    <ul> 
+                    <ul class="no-list-style"> 
                         {choices.sides.map((option, i)=>{ return this.printOptionAsCheck(option, i, "side")})}
                     </ul>
                 </Row>
@@ -322,7 +329,7 @@ class FoodChoiceForm extends React.Component {
              <Form.Group >
                 <Form.Label class="course-name">Desserts:</Form.Label>
                 <Row> 
-                    <ul> 
+                    <ul class="no-list-style"> 
                         {choices.desserts.map((option, i)=>{ return this.printOptionAsCheck(option, i, "dessert")})}
                     </ul>
                 </Row>
