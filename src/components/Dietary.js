@@ -13,12 +13,22 @@ function getGlutenFreeAvailable(i){
 return (<div key={i} class="gfAvailable"><img class="onSameLine" class="toinvert" src="https://cdn-icons-png.flaticon.com/512/100/100277.png" height="18" width="18"/><div class="onSameLine">available</div></div>);
 }
 
+function getVegetarianAvailable(i){
+    return (<div key={i} class="gfAvailable"><FontAwesomeIcon key={i} icon={faLeaf}/><div class="onSameLine">available</div></div>);
+}
+
+function getVeganAvailable(i){
+    return (<div key={i} class="gfAvailable"><FontAwesomeIcon key={i} icon={faSeedling}/><div class="onSameLine">available</div></div>);
+}
+
 function renderIcon(dietaryOption, i) {
     switch(dietaryOption) {
       case 'vegetarian': return <FontAwesomeIcon key={i} icon={faLeaf} />
       case 'vegan': return <FontAwesomeIcon key={i} icon={faSeedling} />;
       case 'GF': return getGlutenFree(i);
       case 'GFavailable': return getGlutenFreeAvailable(i);
+      case 'VEGETARIANavailable': return getVegetarianAvailable(i);
+      case 'VEGANavailable': return getVeganAvailable(i);
       default:
         return '';
     }
