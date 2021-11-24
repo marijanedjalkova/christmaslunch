@@ -3,11 +3,9 @@ import choices  from './consts';
 import {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings, getCrumbs} from './util';
 
 const printGF = (booleanToPrint, optionCourse, option) =>{
-  if (booleanToPrint === undefined){
-    return null;
-  }
   let needToPrint = isGFAvailable(option.option, optionCourse)
   if (!needToPrint){
+    console.log("no need to print GF", option.option, optionCourse)
     return null;
   }
   if (booleanToPrint){
@@ -17,9 +15,6 @@ const printGF = (booleanToPrint, optionCourse, option) =>{
 }
 
 const printVegetarian = (option, optionCourse) =>{
-  if (option.vegetarian === undefined){
-    return null;
-  }
   let needToPrint = isVegetarianAvailable(option.option, optionCourse)
   if (!needToPrint){
     return null;
@@ -31,9 +26,6 @@ const printVegetarian = (option, optionCourse) =>{
 }
 
 const printVegan = (option, optionCourse, optionName) =>{
-  if (option.vegan === undefined){
-    return null;
-  }
   let needToPrint = isVeganAvailable(option.option, optionCourse)
   if (!needToPrint){
     return null;
@@ -45,23 +37,23 @@ const printVegan = (option, optionCourse, optionName) =>{
 }
 
 const printToppings = (dish, optionCourse) =>{
-  if (dish.toppings === undefined || dish.toppings.length === 0 ){
-    return null;
-  }
   let needToPrint = getToppings(dish.option, optionCourse) !== undefined 
   if (!needToPrint){
+    return null;
+  }
+  if (dish.toppings === undefined || dish.toppings.length === 0 ){
     return null;
   }
   return (<div>Toppings: {dish.toppings.join()}</div>);
 }
 
 const printCrumb = (dish, optionCourse) =>{
-  if (dish.crumb === undefined || dish.crumb.trim() === "" ){
-    return null;
-  }
   let needToPrint = getCrumbs(dish.option, optionCourse) !== undefined 
   if (!needToPrint){
     console.log("no need to print", dish.option, optionCourse, getCrumbs(dish.option, optionCourse))
+    return null;
+  }
+  if (dish.crumb === undefined || dish.crumb.trim() === "" ){
     return null;
   }
   return (<div>Crumb: {dish.crumb}</div>);
