@@ -36,9 +36,11 @@ class FoodChoiceForm extends React.Component {
 
       printGF = (optionName, courseName, onChangeFunction) => {
         if (isGFAvailable(optionName, courseName)){
+            let optionWithGF = this.state[courseName + "s"].find(e => e.option === optionName)
+            let isChecked = optionWithGF!== undefined && optionWithGF.GF
             return (<FormCheck >
                         <FormCheck.Label>Do you want this Gluten Free?
-                            <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)}/>
+                            <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)} checked={isChecked}/>
                         </FormCheck.Label>
                     </FormCheck>)
         } else {
@@ -48,9 +50,11 @@ class FoodChoiceForm extends React.Component {
 
     printVegetarian = (optionName, courseName, onChangeFunction) => {
         if (isVegetarianAvailable(optionName, courseName)){
+            let optionWithVegetarian = this.state[courseName + "s"].find(e => e.option === optionName)
+            let isChecked = optionWithVegetarian!== undefined && optionWithVegetarian.vegetarian 
             return (<FormCheck >
                         <FormCheck.Label>Do you want this Vegetarian?
-                            <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)}/>
+                            <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)} checked={isChecked}/>
                         </FormCheck.Label>
                     </FormCheck>)
         } else {
@@ -60,9 +64,11 @@ class FoodChoiceForm extends React.Component {
     
     printVegan = (optionName, courseName, onChangeFunction) => {
         if (isVeganAvailable(optionName, courseName)){
+            let optionWithVegan = this.state[courseName + "s"].find(e => e.option === optionName)
+            let isChecked = optionWithVegan!== undefined && optionWithVegan.vegan
             return (<FormCheck >
                         <FormCheck.Label>Do you want this Vegan?
-                            <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)}/>
+                            <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)} checked={isChecked}/>
                         </FormCheck.Label>
                     </FormCheck>)
         } else {
@@ -73,11 +79,13 @@ class FoodChoiceForm extends React.Component {
     printToppings = (optionName, courseName, onChangeFunction) => {
         let toppings = getToppings(optionName, courseName)
         if (toppings !== undefined && toppings.length !== 0){
+            let optionWithToppings = this.state[courseName + "s"].find(e => e.option === optionName)
+            let isChecked = optionWithToppings!== undefined && optionWithToppings.toppings !== undefined 
             return (
                 <div class="col-sm-4 extra-info">
                 <span class="underlined">Toppings:</span>
                 {toppings.map((toppingName, i) => {
-                return <CheckBox key={i} value={toppingName} description={toppingName} type="checkbox" handleCheckChildElement={(e) => onChangeFunction(optionName, courseName, e)} checkDisabled={!this.state[courseName + "s"].find(e => e.option === optionName)} menupart={courseName}/>})
+                return <CheckBox key={i} value={toppingName} description={toppingName} type="checkbox" handleCheckChildElement={(e) => onChangeFunction(optionName, courseName, e)} checkDisabled={!this.state[courseName + "s"].find(e => e.option === optionName)} menupart={courseName} checked={isChecked && optionWithToppings.toppings.includes(toppingName)}/>})
                 }
                 </div>
             )
