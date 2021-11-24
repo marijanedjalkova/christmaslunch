@@ -57,8 +57,7 @@ class FoodChoiceForm extends React.Component {
         if (isGFAvailable(optionName, courseName)){
             return (<FormCheck >
                         <FormCheck.Label>Do you want this Gluten Free?
-                            <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={this.state.starters.length === 0}/>
-                            {/* disabled={!this.state[courseName + "s"].find(e => e.option === optionName)} */}
+                            <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)}/>
                         </FormCheck.Label>
                     </FormCheck>)
         } else {
