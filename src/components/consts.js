@@ -1,24 +1,72 @@
 const starterChoices = [
-    { option: "soup", diet: ["vegetarian", "GFavailable"], description: "Spiced parsnip and apple soup, crusty bread" },
-    { option: "tartlet", diet: [],  description: "Mushroom & caramelised onion tartlet, blue cheese dressing" },
-    { option: "salmon", diet: [],  description: "Smoked salmon, lemon and dill dressing, potato salad, wholemeal bread" },
-    {option: "pate", diet: ["GFavailable"],  description: "Chicken liver pate, plum and raisin chutney, oatcakes"}
-  ];
+  {option: "soup", diet:["vegetarian", "GFavailable"], description: "Soup of the day, crusty bread"},
+  {option: "haggis-pakora", diet:[], description: "Haggis pakora, pakora sauce"},
+  {option: "bruschetta", diet:["vegetarian"], description: "Mozzarella bruschetta, balsamic, pesto"},
+  {option: "sweet-potato-pakora", diet:["vegan", "GF"], description: "Sweet potato pakora, sweet chilli sauce"},
+  {option: "squid", diet:[], description: "Salt & chilli squid, sweet chilli sauce"},
+  {option: "popcorn-chicken", diet:[], description: "Popcorn chicken, BBQ sauce"},
+  {option: "cullen-skink", diet:["GFavailable"], description: "Cullen Skink, crusty bread"},
+  {option: "sharer", diet:[], description: "Sloans Sharer (Pigs in blankets, roast potatoes, sweet potato pakora, stuffing balls, garlic bread and brie, gravy and cranberry sauce)"}
+      ];
 
 const mainChoices = [
-    { option: "turkey", diet: [],   description: "Roast turkey paupiette, roast potatoes, roast carrots and parsnips, Brussels sprouts, pigs in blankets, gravy" },
-    { option: "beef", diet: ["GFavailable"],  description: "Slow roasted feather blade of beef, sage and onion stuffing ball, roast potatoes, roast carrots and parsnips, Brussels sprouts, pigs in blankets, red wine jus" },
-    { option: "seabass", diet: ["GF"],  description: "Grilled Sea bass, caper butter, tender stem broccoli, potato cake" },
-    {option: "squash", diet: ["vegan"],  description: "Roast butternut squash, caramelised onion & vegan feta tart, tenderstem brocolli, sweet potato fries"}
-  ];
+  {option: "christmas-dinner", diet:[], description: "Sloans Christmas Dinner with all the trimmings"}, 
+  {option: "fish-and-chips", diet:[], description: "Beer battered fish, chunky chips, garden peas, tartar sauce"}, 
+  {option: "scampi", diet:[], description: "Monkfish scampi, chunky chips, garden peas, tartar sauce"},
+  {option: "chicken-katsu", diet:[], description: "Chicken Katsu curry, coconut rice"},
+  {option: "steak-pie", diet:[], description: "Steak & Guinness pie, chunky chips, garden peas"},
+  {option: "haggis-neeps-tatties", diet:["VEGETARIANavailable"], description: "Haggis, neeps & tatties, peppercorn sauce"},
+  {option: "sausage", diet:[], description: "Cumberland sausage, mashed potato, onion gravy"},
+  {option: "linguini", diet:["vegan"], description: "Tenderstem broccoli & pesto linguini with vegan feta"},
+  {option: "caesar", diet:[], description: "Caesar salad – parmesan, croutons & anchovies"},
+  {option: "caesar-bacon", diet:[], description: "Caesar salad – parmesan, croutons & anchovies, WITH CHICKEN AND BACON"},
+  {option: "veg-chilli-rice", diet:["vegetarian", "VEGANavailable"], description: "Sweet potato, halloumi & black bean chilli with sour cream & jalapenos, WITH RICE AND FLATBREAD"},
+  {option: "veg-chilli-nachos", diet:["vegetarian", "VEGANavailable"], description: "Sweet potato, halloumi & black bean chilli with sour cream & jalapenos, WITH NACHOS"},
+  {option: "meat-chilli-rice", diet:[], description: "Beef chilli with sour cream, cheddar cheese, guacamole & jalapenos, WITH RICE AND FLATBREAD"},
+  {option: "meat-chilli-nachos", diet:[], description: "Beef chilli with sour cream, cheddar cheese, guacamole & jalapenos, WITH NACHOS"}
+];
 
-  const dessertChoices = [
-    { option: "caramel-tart", diet: [], description: "Salted caramel and hazelnut tart, Chantilly cream, butterscotch sauce" },
-    { option: "pavlova", diet: ["GF"],  description: "Mulled berry pavlova" },
-    { option: "cheese", diet: ["GFavailable"],  description: "Blue cheese, Scottish cheddar and brie served with oatcakes and chutney" },
-    {option: "chocolate-tart", diet: ["vegan"],  description: "Chocolate truffle tart, berry compote"}
-  ];
+const macaroniChoices = [ 
+  {option: "macaroni", diet:[], toppings: ["bacon", "jalapenos", "brie and cranberry", "pigs in blanket", "turkey and stuffing"], crumb: ["sage and opion (vegan)", "parmesan & basil", "chorizo & manchego"], description: "Macaroni cheese, skinny fries"},
+  {option: "vegan-macaroni", diet:["vegan"], description: "Vegan macaroni with parmesan and basil crumb"}
+];
 
-  const choices = {starters: starterChoices, mains: mainChoices, desserts: dessertChoices}
+const burgerChoices = [
+  {option: "classic-burger", diet:[], toppings: ["jalapenos", "cheese", "bacon", "macaroni", "pepperorn sauce"], description: "The Classic Burger"},
+  {option: "highlander-burger", diet:[], toppings: ["jalapenos", "cheese", "bacon", "macaroni", "pepperorn sauce"], description: "The Highlander Burger"},
+  {option: "mexican-burger", diet:["GFavailable"], toppings: ["jalapenos", "cheese", "bacon", "macaroni", "pepperorn sauce"], description: "The Mexican Burger"},
+  {option: "vegan-burger", diet:["vegan"], toppings: ["jalapenos", "cheese", "bacon", "macaroni", "pepperorn sauce"], description: "The Vegan Burger"}
+];
 
-  export default choices;
+const breadChoices = [
+  {option: "steak-break", diet: ["GFavailable"], description: "Minute steak, caramelised onion, garlic mayo, foccacia"},
+  {option: "chicken-pesto", diet: ["GFavailable"], description: "Chicken, mozzarella, pesto, ciabatta"},
+  {option: "caprese-foccacia", diet: ["vegetarian", "GFavailable"], description: "Caprese foccacia"},
+  {option: "christmas-bread", diet: ["GFavailable"], description: "Christmas Piece and Chips"}
+];
+
+const loadedFriesChoices = [
+  {option: "skinny-loaded-fries", toppings: ["salt & chilli (vegetarian, GF)", "katsu curry sauce (GF)", "cheese & gravy", "beef chilli & jalapenos", "macaroni cheese (vegetarian)"], description: "Skinny Loaded Fries"},
+  {option: "chunky-loaded-fries", toppings: ["salt & chilli (vegetarian, GF)", "katsu curry sauce (GF)", "cheese & gravy", "beef chilli & jalapenos", "macaroni cheese (vegetarian)"], description: "Chunky Chips Loaded Fries"}
+];
+
+const sidesChoices = [
+  {option: "garlic-bread", diet: [], description: "Garlic Bread"},
+  {option: "garlic-bread-cheese", diet: [], description: "Garlic Bread with cheese"},
+  {option: "onion-rings", diet: [], description: "Onion rings, sweet chilli sauce"},
+  {option: "mini-macaroni", diet: [], description: "Mini macaroni"},
+  {option: "garden-salad", diet: [], description: "Garden Salad"},
+  {option: "pigs-in-blankets", diet: [], description: "Pigs in blankets"}
+];
+
+const dessertChoices = [
+  { option: "pretzel", diet: [], description: "Warm pretzel, dipping chocolate & sprinkles" },
+  { option: "brownie", diet: [], description: "Chocolate brownie, vanilla ice cream, chocolate sauce" },
+  { option: "eton-mess-cheesecake", diet: [], description: "Eton mess cheesecake" },
+  { option: "sticky-toffee-pudding", diet: [], description: "Sticky toffee pudding, vanilla ice cream" },
+  { option: "sorbet", diet : [], description: "Sorbet & Mixed berries"}
+];
+
+const choices = {starters: starterChoices, mains: mainChoices, desserts: dessertChoices, macaroni: macaroniChoices, burgers: burgerChoices, breads: breadChoices, loadedFries: loadedFriesChoices, sides: sidesChoices}
+
+export default choices;

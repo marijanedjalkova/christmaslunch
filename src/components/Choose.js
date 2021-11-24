@@ -29,6 +29,8 @@ export class Choose extends React.Component {
           <div class="pleaseOneLine"><Dietary diet={["vegan"]} class="inline-block" /><div class="inline-block"> - vegan</div></div>
           <div class="pleaseOneLine"><Dietary diet={["GF"]} class="inline-block" /><div class="inline-block"> - gluten free</div></div>
           <div class="pleaseOneLine"><Dietary diet={["GFavailable"]} class="inline-block" /><div class="inline-block"> - gluten free option available, tick the box when prompted</div></div>
+          <div class="pleaseOneLine"><Dietary diet={["VEGETARIANavailable"]} class="inline-block" /><div class="inline-block"> - vegetarian option available, tick the box when prompted</div></div>
+          <div class="pleaseOneLine"><Dietary diet={["VEGANavailable"]} class="inline-block" /><div class="inline-block"> - vegan option available, tick the box when prompted</div></div>
           <FoodChoiceForm onSuccess={this.handleSubmission}/></div>}
       </div>
     );

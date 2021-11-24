@@ -8,11 +8,13 @@ import { Radio, RadioGroup} from 'react-radio-group'
 import choices  from './consts';
 import Dietary from './Dietary';
 import isGFAvailable from './util';
+import  CheckBox  from './CheckBox';
 
 const printOption = (option, i) => {
     return (<div class="course" key={i}><Radio value={option.option} className="radio-button menuEntryItem" />
     <div class="menuEntryItem">{option.description}</div><Dietary class="menuEntryItem" diet={option.diet}/></div>);
 }
+
 
 const printGF = (course, courseName, onChangeFunction, changeField) => {
     if (isGFAvailable(course, courseName)){
@@ -29,19 +31,28 @@ const printGF = (course, courseName, onChangeFunction, changeField) => {
 class FoodChoiceForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { name: "", starter: "", starterGF: false, main: "", mainGF: false, 
-        dessert: "", dessertGF: false,
+        this.state = { name: "", starters: [], mains: [], desserts: [], macaroni: [], breads: [], burgers: [], loadedFries: [], sides: [], 
     isMartin: false, errors: {} };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateName = this.updateName.bind(this);
-        this.updateStarter = this.updateStarter.bind(this);
-        this.updateStarterGF = this.updateStarterGF.bind(this);
-        this.updateMain = this.updateMain.bind(this);
-        this.updateMainGF = this.updateMainGF.bind(this);
-        this.updateDessert = this.updateDessert.bind(this);
-        this.updateDessertGF = this.updateDessertGF.bind(this);
+        this.updateStarters = this.updateStarters.bind(this);
+        this.updateMains = this.updateMains.bind(this);
+        this.updateDesserts = this.updateDesserts.bind(this);
+        this.updateMacaroni = this.updateMacaroni.bind(this);
+        this.updateBreads = this.updateBreads.bind(this);
+        this.updateBurgers = this.updateBurgers.bind(this);
+        this.updateLoadedFries = this.updateLoadedFries.bind(this);
+        this.updateSides = this.updateSides.bind(this);
 
+        this.handleCheckChildElement = this.handleCheckChildElement.bind(this);
+        this.printOptionAsCheck = this.printOptionAsCheck.bind(this);
       }
+
+      
+      printOptionAsCheck = (option, i, menupart) => {
+        return (<div class="course" key={i}><CheckBox value={option.option} description={option.description} className="radio-button menuEntryItem" handleCheckChildElement={this.handleCheckChildElement} menupart={menupart}/>
+        <Dietary class="menuEntryItem" diet={option.diet}/></div>);
+    }   
 
     handleValidation(){
         let formIsValid = true;
@@ -73,12 +84,15 @@ class FoodChoiceForm extends React.Component {
           return null;
       }
       var formData = {"name": this.state.name,
-            "starter": this.state.starter,
-            "starterGF": this.state.starterGF,
-            "main": this.state.main,
-            "mainGF": this.state.mainGF,
-            "dessert": this.state.dessert,
-            "dessertGF": this.state.dessertGF };
+            "starters": this.state.starters,
+            "mains": this.state.mains,
+            "desserts": this.state.desserts,
+            "macaroni": this.state.macaroni,
+            "breads": this.state.breads,
+            "burgers": this.state.burgers,
+            "loadedFries": this.state.loadedFries,
+            "sides": this.state.sides,
+        };
       fetch('https://28uc5uo954.execute-api.us-east-2.amazonaws.com/dev/lunchperson', {
         method: 'POST',
         body: JSON.stringify( formData ),
@@ -119,69 +133,105 @@ class FoodChoiceForm extends React.Component {
                     isMartin: false
                   })
             }
+            console.log(this.state)
         })
         
       } 
 
-      updateStarter(event) {
+      updateStarters(event) {
+        console.log("updating starter")
+        console.log(event);
         this.setState({
-          starter: event
+          starters: event
         }, () => {
-            console.log("starter is now " + this.state.starter);
+            console.log("starter is now " + this.state.starters);
             console.log(this.state);
         })
         
       }
       
-      updateStarterGF() {
+      updateMains(event) {
         this.setState({
-         starterGF : !this.state.starterGF
+          mains: event
         }, () => {
-            console.log("starter GF is now " + this.state.starterGF);
+            console.log("main is now " + this.state.mains);
             console.log(this.state);
         })
         
-      }
+      } 
 
-      updateMainGF() {
+      updateDesserts(event) {
         this.setState({
-         mainGF : !this.state.mainGF
+          desserts: event
         }, () => {
-            console.log("main GF is now " + this.state.mainGF);
-            console.log(this.state);
-        })
-        
-      }
-
-      updateDessertGF() {
-        this.setState({
-         dessertGF : !this.state.dessertGF
-        }, () => {
-            console.log("dessert GF is now " + this.state.dessertGF);
+            console.log("dessert is now " + this.state.desserts);
             console.log(this.state);
         })
         
       }
       
-      updateMain(event) {
+      updateMacaroni(event) {
         this.setState({
-          main: event
+          macaroni: event
         }, () => {
-            console.log("main is now " + this.state.main);
+            console.log("macaroni is now " + this.state.macaroni);
+            console.log(this.state);
+        })
+        
+      }
+
+      updateBreads(event) {
+        this.setState({
+          breads: event
+        }, () => {
+            console.log("breads is now " + this.state.breads);
+            console.log(this.state);
+        })
+        
+      }
+
+      updateBurgers(event) {
+        this.setState({
+          burgers: event
+        }, () => {
+            console.log("burgers is now " + this.state.burgers);
+            console.log(this.state);
+        })
+        
+      }
+      
+      updateLoadedFries(event) {
+        this.setState({
+          loadedFries: event
+        }, () => {
+            console.log("loaded fries is now " + this.state.loadedFries);
             console.log(this.state);
         })
         
       } 
 
-      updateDessert(event) {
+      updateSides(event) {
         this.setState({
-          dessert: event
+          sides: event
         }, () => {
-            console.log("dessert is now " + this.state.dessert);
+            console.log("sides is now " + this.state.sides);
             console.log(this.state);
         })
         
       } 
+
+      handleCheckChildElement = (event) => {
+        console.log("in handlecheckedchildelement")
+        
+        let menuChoiceName = event.target.title + "s";
+        if (event.target.checked){
+            this.state[menuChoiceName].push(event.target.value)
+        } else {
+            this.state[menuChoiceName] = this.state[menuChoiceName].filter(e => e !== event.target.value);
+        }
+        console.log(menuChoiceName + " is now")
+        console.log(this.state[menuChoiceName])
+      }
   
     render() {
       return (
@@ -200,15 +250,15 @@ class FoodChoiceForm extends React.Component {
             </Form.Group>
             <div class="menu">
             <Form.Group >
-                <Form.Label class="course-name"> Select a Starter:</Form.Label>
-                <Row>
-                <RadioGroup name="starters" selectedValue={this.state.starter} onChange={this.updateStarter}>
-                {choices.starters.map((option, i)=>{ return printOption(option, i)})}
-                </RadioGroup>
-                {printGF(this.state.starter, "starter", this.updateStarterGF, this.state.starterGF)}
+                <Form.Label class="course-name"> Select a Starter As a check:</Form.Label>
+                <Row> 
+                    <ul> 
+                        {choices.starters.map((option, i)=>{ return this.printOptionAsCheck(option, i, "starter")})}
+                        {printGF(this.state.starter, "starter", this.updateStarterGF, this.state.starterGF)}
+                    </ul>
                 </Row>
             </Form.Group>
-            <Form.Group>
+            {/* <Form.Group>
                 <Form.Label class="course-name">Select a Main:</Form.Label>
                 <Col>
                 <RadioGroup name="mains" selectedValue={this.state.main} onChange={this.updateMain}>
@@ -225,7 +275,7 @@ class FoodChoiceForm extends React.Component {
                 </RadioGroup>
                 {printGF(this.state.dessert, "dessert", this.updateDessertGF, this.state.dessertGF)}
                 </Col>
-            </Form.Group>
+            </Form.Group> */}
             </div>
             <Button
                 column="true"
