@@ -4,7 +4,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import FormCheck from "react-bootstrap/FormCheck";
-import { Radio, RadioGroup} from 'react-radio-group'
 import choices  from './consts';
 import Dietary from './Dietary';
 import {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings, getCrumbs} from './util';
@@ -39,7 +38,7 @@ class FoodChoiceForm extends React.Component {
             let optionWithGF = this.state[courseName + "s"].find(e => e.option === optionName)
             let isChecked = optionWithGF!== undefined && optionWithGF.GF
             return (<FormCheck >
-                        <FormCheck.Label>Do you want this Gluten Free?
+                        <FormCheck.Label><span class="extra-question">[Do you want this Gluten Free?]</span>
                             <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)} checked={isChecked}/>
                         </FormCheck.Label>
                     </FormCheck>)
@@ -53,7 +52,7 @@ class FoodChoiceForm extends React.Component {
             let optionWithVegetarian = this.state[courseName + "s"].find(e => e.option === optionName)
             let isChecked = optionWithVegetarian!== undefined && optionWithVegetarian.vegetarian 
             return (<FormCheck >
-                        <FormCheck.Label>Do you want this Vegetarian?
+                        <FormCheck.Label><span class="extra-question">[Do you want this Vegetarian?]</span>
                             <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)} checked={isChecked}/>
                         </FormCheck.Label>
                     </FormCheck>)
@@ -67,7 +66,7 @@ class FoodChoiceForm extends React.Component {
             let optionWithVegan = this.state[courseName + "s"].find(e => e.option === optionName)
             let isChecked = optionWithVegan!== undefined && optionWithVegan.vegan
             return (<FormCheck >
-                        <FormCheck.Label>Do you want this Vegan?
+                        <FormCheck.Label><span class="extra-question">[Do you want this Vegan?]</span>
                             <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)} checked={isChecked}/>
                         </FormCheck.Label>
                     </FormCheck>)
