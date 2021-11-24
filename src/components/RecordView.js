@@ -2,13 +2,12 @@ import React from 'react';
 import choices  from './consts';
 import {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings, getCrumbs} from './util';
 
-const printGF = (booleanToPrint, optionCourse, option) =>{
+const printGF = (option, optionCourse) =>{
   let needToPrint = isGFAvailable(option.option, optionCourse)
   if (!needToPrint){
-    console.log("no need to print GF", option.option, optionCourse)
     return null;
   }
-  if (booleanToPrint){
+  if (option.GF){
     return (<div>(GF)</div>)
   }
   return (<div>(NOT GF)</div>);
@@ -25,7 +24,7 @@ const printVegetarian = (option, optionCourse) =>{
   return (<div>(NOT vegetarian)</div>);
 }
 
-const printVegan = (option, optionCourse, optionName) =>{
+const printVegan = (option, optionCourse) =>{
   let needToPrint = isVeganAvailable(option.option, optionCourse)
   if (!needToPrint){
     return null;
@@ -50,7 +49,6 @@ const printToppings = (dish, optionCourse) =>{
 const printCrumb = (dish, optionCourse) =>{
   let needToPrint = getCrumbs(dish.option, optionCourse) !== undefined 
   if (!needToPrint){
-    console.log("no need to print", dish.option, optionCourse, getCrumbs(dish.option, optionCourse))
     return null;
   }
   if (dish.crumb === undefined || dish.crumb.trim() === "" ){
@@ -94,7 +92,7 @@ const printWholeCourse = (dishes, courseNameSingle) => {
       return (
         <div>
         <div class="course-value">{printDish(dish, courseNameSingle)}</div>
-        <div class="course-value">{printGF(dish.GF, courseNameSingle, dish)}</div> 
+        <div class="course-value">{printGF(dish, courseNameSingle)}</div> 
         <div class="course-value">{printVegetarian(dish, courseNameSingle)}</div> 
         <div class="course-value">{printVegan(dish, courseNameSingle)}</div> 
         <div class="course-value">{printToppings(dish, courseNameSingle)}</div> 
