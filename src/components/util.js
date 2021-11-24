@@ -35,5 +35,10 @@ function getToppings(item, itemtype){
     return menu.find(starter => (starter.option === item)).toppings;
 }
 
-export {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings}
+function getCrumbs(item, itemtype){
+    const menu = getMenuByType(itemtype);
+    return menu.find(starter => (starter.option === item)).crumbs;
+}
+
+export {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings, getCrumbs}
 

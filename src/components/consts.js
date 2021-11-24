@@ -27,7 +27,7 @@ const mainChoices = [
 ];
 
 const macaroniChoices = [ 
-  {option: "macaroni", diet:[], toppings: ["bacon", "jalapenos", "brie and cranberry", "pigs in blanket", "turkey and stuffing"], crumb: ["sage and opion (vegan)", "parmesan & basil", "chorizo & manchego"], description: "Macaroni cheese, skinny fries"},
+  {option: "macaroni", diet:[], toppings: ["bacon", "jalapenos", "brie and cranberry", "pigs in blanket", "turkey and stuffing"], crumbs: ["sage and opion (vegan)", "parmesan & basil", "chorizo & manchego"], description: "Macaroni cheese, skinny fries"},
   {option: "vegan-macaroni", diet:["vegan"], description: "Vegan macaroni with parmesan and basil crumb"}
 ];
 

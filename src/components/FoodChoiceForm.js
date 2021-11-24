@@ -8,7 +8,7 @@ import InputGroup from "react-bootstrap/InputGroup"
 import { Radio, RadioGroup} from 'react-radio-group'
 import choices  from './consts';
 import Dietary from './Dietary';
-import {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings} from './util';
+import {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings, getCrumbs} from './util';
 import  CheckBox  from './CheckBox';
 
 class FoodChoiceForm extends React.Component {
@@ -25,11 +25,13 @@ class FoodChoiceForm extends React.Component {
         this.changeVegetarian = this.changeVegetarian.bind(this);
         this.changeVegan = this.changeVegan.bind(this);
         this.changeToppings = this.changeToppings.bind(this);
+        this.changeCrumb = this.changeCrumb.bind(this);
 
         this.printGF = this.printGF.bind(this);
         this.printVegetarian = this.printVegetarian.bind(this);
         this.printVegan = this.printVegan.bind(this);
         this.printToppings = this.printToppings.bind(this);
+        this.printCrumbs = this.printCrumbs.bind(this);
       }
 
       printGF = (optionName, courseName, onChangeFunction) => {
@@ -77,6 +79,16 @@ class FoodChoiceForm extends React.Component {
             return null;
         }
     }
+
+    printCrumbs = (optionName, courseName, onChangeFunction) => {
+        let crumbs = getCrumbs(optionName, courseName)
+        if (crumbs !== undefined && crumbs.length !== 0){
+            return (crumbs.map((crumbName, i) => {
+                return <CheckBox key={i} value={crumbName} description={crumbName} type="checkbox" handleCheckChildElement={(e) => onChangeFunction(optionName, courseName, e)} checkDisabled={!this.state[courseName + "s"].find(e => e.option === optionName)} menupart={courseName}/>}))
+        } else {
+            return null;
+        }
+    }
       
       printOptionAsCheck = (option, i, menupart) => {
         return (<div class="course" key={i}><CheckBox value={option.option} description={option.description} className="radio-button menuEntryItem" handleCheckChildElement={this.handleCheckChildElement} menupart={menupart}/>
@@ -85,6 +97,7 @@ class FoodChoiceForm extends React.Component {
         {this.printVegetarian(option.option, menupart, this.changeVegetarian) } 
         {this.printVegan(option.option, menupart, this.changeVegan) } 
         {this.printToppings(option.option, menupart, this.changeToppings) } 
+        {this.printCrumbs(option.option, menupart, this.changeCrumb) } 
         </div>  
     );
     }
@@ -120,6 +133,13 @@ class FoodChoiceForm extends React.Component {
         }
         itemToppings = itemToppings.concat(chosenTopping)
         items.map(e => {if (e.option === dishName){ e.toppings = itemToppings }})
+        this.setState({[menuChoiceName] : items}, () => {console.log(this.state)})
+    }
+
+    changeCrumb = (dishName, courseName, event) => {
+        const menuChoiceName = courseName + "s"
+        let items = [...this.state[menuChoiceName]]
+        items.map((item) => {if (item.option === dishName) {item.crumb = event.target.value}})
         this.setState({[menuChoiceName] : items}, () => {console.log(this.state)})
     }
 
