@@ -15,20 +15,20 @@ function getMenuByType(itemtype){
       }
 }
 
-function isGFAvailable(item, itemtype){
+ function isGFAvailable(item, itemtype){
     const menu = getMenuByType(itemtype);
     return menu.some(starter => (starter.option === item && starter.diet.includes("GFavailable")));
 }
 
-export function isVegetarianAvailable(item, itemtype){
+ function isVegetarianAvailable(item, itemtype){
     const menu = getMenuByType(itemtype);
     return menu.some(starter => (starter.option === item && starter.diet.includes("VEGETARIANavailable")));
 }
 
-export function isVeganAvailable(item, itemtype){
+ function isVeganAvailable(item, itemtype){
     const menu = getMenuByType(itemtype);
     return menu.some(starter => (starter.option === item && starter.diet.includes("VEGANavailable")));
 }
 
-export default isGFAvailable;
+export {isGFAvailable, isVegetarianAvailable, isVeganAvailable}
 

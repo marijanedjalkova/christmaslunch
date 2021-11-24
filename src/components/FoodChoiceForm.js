@@ -7,34 +7,8 @@ import FormCheck from "react-bootstrap/FormCheck";
 import { Radio, RadioGroup} from 'react-radio-group'
 import choices  from './consts';
 import Dietary from './Dietary';
-import isGFAvailable from './util';
-import isVegetarianAvailable from './util';
-import isVeganAvailable from './util';
+import {isGFAvailable, isVegetarianAvailable, isVeganAvailable} from './util';
 import  CheckBox  from './CheckBox';
-
-const printVegetarian = (optionName, courseName, onChangeFunction) => {
-    if (isVegetarianAvailable(optionName, courseName)){
-        return (<FormCheck >
-                    <FormCheck.Label>Do you want this Vegetarian?
-                        <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} />
-                    </FormCheck.Label>
-                </FormCheck>)
-    } else {
-        return null;
-    }
-}
-
-const printVegan = (optionName, courseName, onChangeFunction) => {
-    if (isVeganAvailable(optionName, courseName)){
-        return (<FormCheck >
-                    <FormCheck.Label>Do you want this Vegan?
-                        <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} />
-                    </FormCheck.Label>
-                </FormCheck>)
-    } else {
-        return null;
-    }
-}
 
 class FoodChoiceForm extends React.Component {
     constructor(props) {
@@ -51,6 +25,8 @@ class FoodChoiceForm extends React.Component {
         this.changeVegan = this.changeVegan.bind(this);
 
         this.printGF = this.printGF.bind(this);
+        this.printVegetarian = this.printVegetarian.bind(this);
+        this.printVegan = this.printVegan.bind(this);
       }
 
       printGF = (optionName, courseName, onChangeFunction) => {
@@ -64,28 +40,60 @@ class FoodChoiceForm extends React.Component {
             return null;
         }
     }
+
+    printVegetarian = (optionName, courseName, onChangeFunction) => {
+        if (isVegetarianAvailable(optionName, courseName)){
+            return (<FormCheck >
+                        <FormCheck.Label>Do you want this Vegetarian?
+                            <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)}/>
+                        </FormCheck.Label>
+                    </FormCheck>)
+        } else {
+            return null;
+        }
+    }
+    
+    printVegan = (optionName, courseName, onChangeFunction) => {
+        if (isVeganAvailable(optionName, courseName)){
+            return (<FormCheck >
+                        <FormCheck.Label>Do you want this Vegan?
+                            <FormCheck.Input type="checkbox" onChange={(e) => onChangeFunction(optionName, courseName, e)} disabled={!this.state[courseName + "s"].find(e => e.option === optionName)}/>
+                        </FormCheck.Label>
+                    </FormCheck>)
+        } else {
+            return null;
+        }
+    }
       
       printOptionAsCheck = (option, i, menupart) => {
         return (<div class="course" key={i}><CheckBox value={option.option} description={option.description} className="radio-button menuEntryItem" handleCheckChildElement={this.handleCheckChildElement} menupart={menupart}/>
         <Dietary class="menuEntryItem" diet={option.diet}/>
         {this.printGF(option.option, menupart, this.changeGF) } 
+        {this.printVegetarian(option.option, menupart, this.changeVegetarian) } 
+        {this.printVegan(option.option, menupart, this.changeVegan) } 
         </div>  
     );
     }
     
     changeGF = (dishName, courseName, event) => {
-      this.state[courseName + "s"].map((item) => {if (item.option === dishName) {item.GF = event.target.checked}})
-      console.log(this.state)
+      const menuChoiceName = courseName + "s"
+      let items = [...this.state[menuChoiceName]]
+      items.map((item) => {if (item.option === dishName) {item.GF = event.target.checked}})
+      this.setState({[menuChoiceName] : items}, () => {console.log(this.state)})
     }
 
     changeVegetarian = (dishName, courseName, event) => {
-        this.state[courseName + "s"].map((item) => {if (item.option === dishName) {item.vegetarian = event.target.checked}})
-        console.log(this.state)
+      const menuChoiceName = courseName + "s"
+      let items = [...this.state[menuChoiceName]]
+      items.map((item) => {if (item.option === dishName) {item.vegetarian = event.target.checked}})
+      this.setState({[menuChoiceName] : items}, () => {console.log(this.state)})
     }
 
     changeVegan = (dishName, courseName, event) => {
-    this.state[courseName + "s"].map((item) => {if (item.option === dishName) {item.vegan = event.target.checked}})
-    console.log(this.state)
+        const menuChoiceName = courseName + "s"
+        let items = [...this.state[menuChoiceName]]
+        items.map((item) => {if (item.option === dishName) {item.vegan = event.target.checked}})
+        this.setState({[menuChoiceName] : items}, () => {console.log(this.state)})
     }
 
     handleValidation(){
