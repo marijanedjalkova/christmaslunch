@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import RecordView from './RecordView'
+import CostView from './CostView'
 import './Record.css';
 
 class Records extends React.Component {
@@ -95,6 +96,7 @@ render() {
             </Button>
         </Form>
         <RecordView class="record-view" data={this.state}/>
+        <CostView class="record-view" data={this.state}/>
       </div>
     );
   }

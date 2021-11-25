@@ -27,7 +27,7 @@ const mainChoices = [
 ];
 
 const macaroniChoices = [ 
-  {option: "macaroni", diet:[], price: 9.50, toppings: [{name: "bacon", price: 1}, {name: "jalapenos", price: 1.50}, {name: "brie and cranberry", price: 1.50}, {name: "pigs in blanket", price: 1.50}, {name: "turkey and stuffing", price: 1.50}], crumbs: ["sage and opion (vegan)", "parmesan & basil", "chorizo & manchego"], description: "Macaroni cheese, skinny fries"},
+  {option: "macaroni", diet:[], price: 9.50, toppings: [{name: "bacon", price: 1}, {name: "jalapenos", price: 1.50}, {name: "brie and cranberry", price: 1.50}, {name: "pigs in blanket", price: 1.50}, {name: "turkey and stuffing", price: 1.50}], crumbs: [{name: "sage and opion (vegan)", price: 1}, {name: "parmesan & basil", price: 1}, {name: "chorizo & manchego", price : 1}], description: "Macaroni cheese, skinny fries"},
   {option: "vegan-macaroni", price: 9.50, diet:["vegan"], description: "Vegan macaroni with parmesan and basil crumb"}
 ];
 
