@@ -145,6 +145,7 @@ class FoodChoiceForm extends React.Component {
     }
 
     changeToppings = (dishName, courseName, event) => {
+        console.log("changeToppings")
         let chosenTopping = event.target.value;
         const menuChoiceName = courseName + "s"
         let items = [...this.state[menuChoiceName]]
@@ -152,7 +153,13 @@ class FoodChoiceForm extends React.Component {
         if (itemToppings === undefined){
             itemToppings = []
         }
-        itemToppings = itemToppings.concat(chosenTopping)
+        if (itemToppings.includes(chosenTopping)){
+            // need to remove it
+            itemToppings = itemToppings.filter(e => e !== chosenTopping)
+        } else {
+            // need to add it
+            itemToppings = itemToppings.concat(chosenTopping)
+        }
         items.map(e => {if (e.option === dishName){ e.toppings = itemToppings }})
         this.setState({[menuChoiceName] : items}, () => {console.log(this.state)})
     }

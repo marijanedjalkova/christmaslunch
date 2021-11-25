@@ -32,7 +32,12 @@ function getMenuByType(itemtype){
 
 function getToppings(item, itemtype){
     const menu = getMenuByType(itemtype);
-    return menu.find(starter => (starter.option === item)).toppings;
+    let toppingsWithPrices = menu.find(starter => (starter.option === item)).toppings;
+    if (toppingsWithPrices === undefined){
+        return toppingsWithPrices;
+    }
+    let result = toppingsWithPrices.map(toppingDict => toppingDict.name)
+    return result;
 }
 
 function getCrumbs(item, itemtype){
