@@ -7,9 +7,11 @@ const calculateAllCost = (data) => {
     let total = 0;
     courses.map((courseName) => {
         let currentCourseChoices = data[courseName]
-        currentCourseChoices.map((currentCourseChoice) => {
-            total += getPrice(currentCourseChoice, courseName)
-        })
+        if (currentCourseChoices !== undefined && currentCourseChoices.length > 0){
+            currentCourseChoices.map((currentCourseChoice) => {
+                total += getPrice(currentCourseChoice, courseName)
+            })
+        }
     })
     return total;
 }
