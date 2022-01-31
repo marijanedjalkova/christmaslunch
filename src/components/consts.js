@@ -6,11 +6,10 @@ const starterChoices = [
   {option: "squid", diet:[],  price: 6.75, description: "Salt & chilli squid, sweet chilli sauce"},
   {option: "popcorn-chicken", diet:[], price: 5.75, description: "Popcorn chicken, BBQ sauce"},
   {option: "cullen-skink", diet:["GFavailable"], price: 5.75, description: "Cullen Skink, crusty bread"},
-  {option: "sharer", diet:[], price: 16, description: "Sloans Sharer (Pigs in blankets, roast potatoes, sweet potato pakora, stuffing balls, garlic bread and brie, gravy and cranberry sauce)"}
+  {option: "sharer", diet:[], price: 15, description: "Sloans Sharer (Mixed pakora, popcorn chicken, garlic bread, skinny fries, BBQ sauce, sweet chilli sauce)"}
       ];
 
 const mainChoices = [
-  {option: "christmas-dinner", diet:[], price: 15, description: "Sloans Christmas Dinner with all the trimmings"}, 
   {option: "fish-and-chips", diet:[], price: 11, description: "Beer battered fish, chunky chips, garden peas, tartar sauce"}, 
   {option: "scampi", diet:[], price: 13.50, description: "Monkfish scampi, chunky chips, garden peas, tartar sauce"},
   {option: "chicken-katsu", diet:[], price: 13, description: "Chicken Katsu curry, coconut rice"},
@@ -27,9 +26,7 @@ const mainChoices = [
 ];
 
 const macaroniChoices = [ 
-  {option: "macaroni", diet:[], price: 9.50, toppings: [{name: "bacon", price: 1}, {name: "jalapenos", price: 1.50}, {name: "brie and cranberry", price: 1.50}, {name: "pigs in blanket", price: 1.50}, {name: "turkey and stuffing", price: 1.50}], crumbs: [{name: "sage and opion (vegan)", price: 1}, {name: "parmesan & basil", price: 1}, {name: "chorizo & manchego", price : 1}], description: "Macaroni cheese, skinny fries"},
-  {option: "vegan-macaroni", price: 9.50, diet:["vegan"], description: "Vegan macaroni with parmesan and basil crumb"}
-];
+  {option: "macaroni", diet:[], price: 9.50, toppingLimit: 2, toppings: [{name: "smoked haddock", price: 0.75}, {name: "jalapenos", price: 0.75}, {name: "gruyere", price: 0.75}, {name: "brie", price: 0.75}, {name: "bacon", price: 0.75}, {name: "sun blush tomatoes", price: 0.75}, {name: "beef chilli", price: 0.75}, {name: "katsu curry", price: 0.75}], crumbs: [{name: "bacon & gruyere", price: 1}, {name: "parmesan & basil", price: 1}, {name: "chorizo & manchego", price : 1}, {name: "no special crumb", price: 0}], description: "Macaroni cheese, skinny fries. Choose 2 toppings for £1.50 and/or a crumb for £1"}];
 
 const burgerChoices = [
   {option: "classic-burger", diet:[], price: 10.50, toppings: [{name: "jalapenos", price: 1}, {name: "cheese", price: 1}, {name: "bacon", price: 1.50}, {name: "macaroni", price: 1.50}, {name: "pepperorn sauce", price: 1.50}], description: "The Classic Burger"},
@@ -39,10 +36,9 @@ const burgerChoices = [
 ];
 
 const breadChoices = [
-  {option: "steak-bread", diet: ["GFavailable"], price: 9.50, description: "Minute steak, caramelised onion, garlic mayo, foccacia"},
-  {option: "chicken-pesto", diet: ["GFavailable"], price: 9.50, description: "Chicken, mozzarella, pesto, ciabatta"},
-  {option: "caprese-foccacia", diet: ["vegetarian", "GFavailable"], price: 8.50, description: "Caprese foccacia"},
-  {option: "christmas-bread", diet: ["GFavailable"], price: 11, description: "Christmas Piece and Chips"}
+  {option: "steak-bread", diet: ["GFavailable"], price: 9.50, description: "Minute steak, caramelised onion, garlic mayo, foccacia + skinny fries"},
+  {option: "chicken-pesto", diet: ["GFavailable"], price: 9.50, description: "Chicken, mozzarella, pesto, ciabatta + skinny fries"},
+  {option: "caprese-foccacia", diet: ["vegetarian", "GFavailable"], price: 8.50, description: "Caprese foccacia + skinny fries"}
 ];
 
 const loadedFriesChoices = [
@@ -55,8 +51,7 @@ const sidesChoices = [
   {option: "garlic-bread-cheese", diet: [], price: 4.50, description: "Garlic Bread with cheese"},
   {option: "onion-rings", diet: [], price: 3.50, description: "Onion rings, sweet chilli sauce"},
   {option: "mini-macaroni", diet: [], price: 3.50, description: "Mini macaroni"},
-  {option: "garden-salad", diet: [], price: 3.50, description: "Garden Salad"},
-  {option: "pigs-in-blankets", diet: [], price: 3.50, description: "Pigs in blankets"}
+  {option: "garden-salad", diet: [], price: 3.50, description: "Garden Salad"}
 ];
 
 const dessertChoices = [

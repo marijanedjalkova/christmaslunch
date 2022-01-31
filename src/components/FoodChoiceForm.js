@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import FormCheck from "react-bootstrap/FormCheck";
 import choices  from './consts';
 import Dietary from './Dietary';
-import {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings, getCrumbs} from './util';
+import {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings, getCrumbs, getToppingLimits} from './util';
 import  CheckBox  from './CheckBox';
 import  RadioBox  from './RadioBox';
 
@@ -31,6 +31,9 @@ class FoodChoiceForm extends React.Component {
         this.printVegan = this.printVegan.bind(this);
         this.printToppings = this.printToppings.bind(this);
         this.printCrumbs = this.printCrumbs.bind(this);
+
+        this.optionNotSelected = this.optionNotSelected.bind(this);
+        this.toppingLimitReached = this.toppingLimitReached.bind(this);
       }
 
       printGF = (optionName, courseName, onChangeFunction) => {
@@ -75,8 +78,30 @@ class FoodChoiceForm extends React.Component {
         }
     }
 
+    optionNotSelected = (optionName, courseName) => {
+        return !this.state[courseName + "s"].find(e => e.option === optionName)
+    }
+
+    toppingLimitReached = (optionName, courseName, toppingLimit, toppingName) => {
+        if (toppingLimit === undefined){
+            return false;
+        }
+        const optionSelected = this.state[courseName + "s"].find(e => e.option === optionName)
+        const toppingsSelectedForTheSelectedOption = optionSelected.toppings
+        if (toppingsSelectedForTheSelectedOption === undefined || toppingsSelectedForTheSelectedOption.length === 0){
+            return false;
+        }
+        const isCurrentToppingSelected = toppingsSelectedForTheSelectedOption.find(topping => topping === toppingName)
+        if (isCurrentToppingSelected){
+            return false;
+        }
+        const numberOfToppingsSelected = toppingsSelectedForTheSelectedOption.length
+        return numberOfToppingsSelected >= toppingLimit
+    }
+
     printToppings = (optionName, courseName, onChangeFunction) => {
         let toppings = getToppings(optionName, courseName)
+        let toppingLimit = getToppingLimits(optionName, courseName)
         if (toppings !== undefined && toppings.length !== 0){
             let optionWithToppings = this.state[courseName + "s"].find(e => e.option === optionName)
             let isChecked = optionWithToppings!== undefined && optionWithToppings.toppings !== undefined 
@@ -84,7 +109,10 @@ class FoodChoiceForm extends React.Component {
                 <div class="col-sm-4 extra-info">
                 <span class="underlined">Toppings:</span>
                 {toppings.map((toppingName, i) => {
-                return <CheckBox key={i} value={toppingName} description={toppingName} type="checkbox" handleCheckChildElement={(e) => onChangeFunction(optionName, courseName, e)} checkDisabled={!this.state[courseName + "s"].find(e => e.option === optionName)} menupart={courseName} checked={isChecked && optionWithToppings.toppings.includes(toppingName)}/>})
+                return <CheckBox key={i} value={toppingName} description={toppingName} 
+                    type="checkbox" handleCheckChildElement={(e) => onChangeFunction(optionName, courseName, e)} 
+                    checkDisabled={this.optionNotSelected(optionName, courseName) || this.toppingLimitReached(optionName, courseName, toppingLimit, toppingName)} 
+                    menupart={courseName} checked={isChecked && optionWithToppings.toppings.includes(toppingName)}/>})
                 }
                 </div>
             )

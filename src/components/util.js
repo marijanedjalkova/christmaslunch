@@ -40,13 +40,26 @@ function getMenuByType(itemtype){
 
 function getToppings(item, itemtype){
     const menu = getMenuByType(itemtype);
-    let toppingsWithPrices = menu.find(starter => (starter.option === item)).toppings;
+    const fullItem = menu.find(menuItem => (menuItem.option === item))
+    let toppingsWithPrices = fullItem.toppings;
     if (toppingsWithPrices === undefined){
         return toppingsWithPrices;
     }
     let result = toppingsWithPrices.map(toppingDict => toppingDict.name)
     return result;
 }
+
+
+function getFullItem(item, itemtype){
+    const menu = getMenuByType(itemtype);
+    return menu.find(menuItem => (menuItem.option === item))
+}
+
+function getToppingLimits(item, itemtype){
+    const fullItem = getFullItem(item, itemtype)
+    return fullItem.toppingLimit;
+}
+
 
 function getCrumbs(item, itemtype){
     const menu = getMenuByType(itemtype);
@@ -56,6 +69,11 @@ function getCrumbs(item, itemtype){
     }
     let result = crumbsWithPrices.map(crumbDict => crumbDict.name)
     return result;
+}
+
+function getCrumbLimits(item, itemtype){
+    const fullItem = getFullItem(item, itemtype)
+    return fullItem.crumbLimit;
 }
 
 const getToppingsCost = (itemFromMenu, itemToppings) => {
@@ -94,5 +112,5 @@ function getPrice(item, itemtype){
     return mainPrice + toppingsCost + crumbCost
 }
 
-export {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings, getCrumbs, getPrice}
+export {isGFAvailable, isVegetarianAvailable, isVeganAvailable, getToppings, getCrumbs, getPrice, getToppingLimits}
 

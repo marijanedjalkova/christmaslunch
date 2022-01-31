@@ -28,9 +28,10 @@ class CostView extends React.Component {
         let serviceCharge = Math.round(totalItemCost/10 * 100) / 100
         return (
           <div class="menu">
-           <div>Food: {totalItemCost}</div>
-           <div>10% service: {serviceCharge}</div>
-           <div>Overall: {totalItemCost  + serviceCharge}</div>
+           <div>Food: £{totalItemCost}</div>
+           <div>10% service: £{serviceCharge}</div>
+           <div>Minus deposit: -£10</div>
+           <div>Overall for food minus the deposit: £{Math.round((totalItemCost  + serviceCharge - 10) * 100) / 100} </div>
           </div>
         )
       }
